@@ -1,0 +1,347 @@
+\begin{thebibliography}{10}
+
+\bibitem{CS231N}
+Data preprocessing.
+
+\bibitem{historyad}
+History of autonomous cars.
+\newblock
+  \url{https://en.wikipedia.org/wiki/History_of_autonomous_cars#cite_note-106l}.
+
+\bibitem{nohand}
+No hands across america home page.
+\newblock
+  \url{http://www.cs.cmu.edu/afs/cs/usr/tjochem/www/nhaa/nhaa_home_page.html}.
+
+\bibitem{One-hot}
+One-hot-encoding.
+
+\bibitem{BMVA}
+What is computer vision.
+
+\bibitem{pawtc}
+Phantom auto will tour city.
+\newblock {\em The Milwaukee Sentinel. Google News Archive}, December 1926.
+
+\bibitem{J3016_201401}
+
+\newblock {\em Taxonomy and Definitions for Terms Related to On-Road Motor
+  Vehicle Automated Driving Systems}, Jan 2014.
+
+\bibitem{parallel}
+Dana~H. Ballard, Geoffrey~E. Hinton, and Terrence~J. Sejnowski.
+\newblock Parallel visual computation.
+\newblock {\em Nature}, 306:21–26, 1983.
+
+\bibitem{Baxter:1995:LIR:225298.225336}
+Jonathan Baxter.
+\newblock Learning internal representations.
+\newblock In {\em Proceedings of the Eighth Annual Conference on Computational
+  Learning Theory}, COLT '95, pages 311--320, New York, NY, USA, 1995. ACM.
+
+\bibitem{DBLP:journals/corr/abs-1802-09941}
+Tal Ben{-}Nun and Torsten Hoefler.
+\newblock Demystifying parallel and distributed deep learning: An in-depth
+  concurrency analysis.
+\newblock {\em CoRR}, abs/1802.09941, 2018.
+
+\bibitem{6472238}
+Y.~Bengio, A.~Courville, and P.~Vincent.
+\newblock Representation learning: A review and new perspectives.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  35(8):1798--1828, Aug 2013.
+
+\bibitem{Bengio:1994:LLD:2325857.2328340}
+Y.~Bengio, P.~Simard, and P.~Frasconi.
+\newblock Learning long-term dependencies with gradient descent is difficult.
+\newblock {\em Trans. Neur. Netw.}, 5(2):157--166, March 1994.
+
+\bibitem{DBLP:journals/corr/abs-1206-5533}
+Yoshua Bengio.
+\newblock Practical recommendations for gradient-based training of deep
+  architectures.
+\newblock {\em CoRR}, abs/1206.5533, 2012.
+
+\bibitem{NIPS2006_3048}
+Yoshua Bengio, Pascal Lamblin, Dan Popovici, and Hugo Larochelle.
+\newblock Greedy layer-wise training of deep networks.
+\newblock In B.~Sch\"{o}lkopf, J.~C. Platt, and T.~Hoffman, editors, {\em
+  Advances in Neural Information Processing Systems 19}, pages 153--160. MIT
+  Press, 2007.
+
+\bibitem{Bishop:2006:PRM:1162264}
+Christopher~M. Bishop.
+\newblock {\em Pattern Recognition and Machine Learning (Information Science
+  and Statistics)}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 2006.
+
+\bibitem{Boureau:2010}
+Y-Lan Boureau, Jean Ponce, and Yann LeCun.
+\newblock A theoretical analysis of feature pooling in visual recognition.
+\newblock In {\em Proceedings of the 27th International Conference on
+  International Conference on Machine Learning}, ICML'10, pages 111--118, USA,
+  2010. Omnipress.
+
+\bibitem{doi:10.1504/IJVAS.2012.051250}
+Alberto Broggi, Pietro Cerri, Mirko Felisa, Maria~Chiara Laghi, Luca Mazzei,
+  and Pier~Paolo Porta.
+\newblock The vislab intercontinental autonomous challenge: an extensive test
+  for a platoon of intelligent vehicles.
+\newblock {\em International Journal of Vehicle Autonomous Systems},
+  10(3):147--164, 2012.
+
+\bibitem{Caruana1997}
+Rich Caruana.
+\newblock Multitask learning.
+\newblock {\em Machine Learning}, 28(1):41--75, Jul 1997.
+
+\bibitem{Caruana:2000:ONN:3008751.3008807}
+Rich Caruana, Steve Lawrence, and Lee Giles.
+\newblock Overfitting in neural nets: Backpropagation, conjugate gradient, and
+  early stopping.
+\newblock In {\em Proceedings of the 13th International Conference on Neural
+  Information Processing Systems}, NIPS'00, pages 381--387, Cambridge, MA, USA,
+  2000. MIT Press.
+
+\bibitem{DBLP:journals/corr/ChabotCRTC17}
+Florian Chabot, Mohamed Chaouch, Jaonary Rabarisoa, C{\'{e}}line
+  Teuli{\`{e}}re, and Thierry Chateau.
+\newblock Deep {MANTA:} {A} coarse-to-fine many-task network for joint 2d and
+  3d vehicle analysis from monocular image.
+\newblock {\em CoRR}, abs/1703.07570, 2017.
+
+\bibitem{chollet2015keras}
+Fran\c{c}ois Chollet et~al.
+\newblock Keras.
+\newblock \url{https://keras.io}, 2015.
+
+\bibitem{DBLP:journals/corr/DaiLHS16}
+Jifeng Dai, Yi~Li, Kaiming He, and Jian Sun.
+\newblock {R-FCN:} object detection via region-based fully convolutional
+  networks.
+\newblock {\em CoRR}, abs/1605.06409, 2016.
+
+\bibitem{NIPS2012_4562}
+Sanja Fidler, Sven Dickinson, and Raquel Urtasun.
+\newblock 3d object detection and viewpoint estimation with a deformable 3d
+  cuboid model.
+\newblock In F.~Pereira, C.~J.~C. Burges, L.~Bottou, and K.~Q. Weinberger,
+  editors, {\em Advances in Neural Information Processing Systems 25}, pages
+  611--619. Curran Associates, Inc., 2012.
+
+\bibitem{Forsyth:2002:CVM:580035}
+David~A. Forsyth and Jean Ponce.
+\newblock {\em Computer Vision: A Modern Approach}.
+\newblock Prentice Hall Professional Technical Reference, 2002.
+
+\bibitem{Geiger2012CVPR}
+Andreas Geiger, Philip Lenz, and Raquel Urtasun.
+\newblock Are we ready for autonomous driving? the kitti vision benchmark
+  suite.
+\newblock In {\em Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, 2012.
+
+\bibitem{DBLP:journals/corr/Girshick15}
+Ross~B. Girshick.
+\newblock Fast {R-CNN}.
+\newblock {\em CoRR}, abs/1504.08083, 2015.
+
+\bibitem{DBLP:journals/corr/GirshickDDM13}
+Ross~B. Girshick, Jeff Donahue, Trevor Darrell, and Jitendra Malik.
+\newblock Rich feature hierarchies for accurate object detection and semantic
+  segmentation.
+\newblock {\em CoRR}, abs/1311.2524, 2013.
+
+\bibitem{pmlr-v9-glorot10a}
+Xavier Glorot and Yoshua Bengio.
+\newblock Understanding the difficulty of training deep feedforward neural
+  networks.
+\newblock In Yee~Whye Teh and Mike Titterington, editors, {\em Proceedings of
+  the Thirteenth International Conference on Artificial Intelligence and
+  Statistics}, volume~9 of {\em Proceedings of Machine Learning Research},
+  pages 249--256, Chia Laguna Resort, Sardinia, Italy, 13--15 May 2010. PMLR.
+
+\bibitem{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem{DBLP:journals/corr/He014}
+Kaiming He and Jian Sun.
+\newblock Convolutional neural networks at constrained time cost.
+\newblock {\em CoRR}, abs/1412.1710, 2014.
+
+\bibitem{DBLP:HeZRS15}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock {\em CoRR}, abs/1512.03385, 2015.
+
+\bibitem{DBLP:journals/corr/HeZRS15}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock {\em CoRR}, abs/1512.03385, 2015.
+
+\bibitem{DBLP:abs-1207-0580}
+Geoffrey~E. Hinton, Nitish Srivastava, Alex Krizhevsky, Ilya Sutskever, and
+  Ruslan Salakhutdinov.
+\newblock Improving neural networks by preventing co-adaptation of feature
+  detectors.
+\newblock {\em CoRR}, abs/1207.0580, 2012.
+
+\bibitem{DBLP:journals/corr/IoffeS15}
+Sergey Ioffe and Christian Szegedy.
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift.
+\newblock {\em CoRR}, abs/1502.03167, 2015.
+
+\bibitem{Jayalakshmi2011}
+T~Jayalakshmi and Santhakumaran A.
+\newblock Statistical normalization and back propagation for classification.
+\newblock 3:89--93, 01 2011.
+
+\bibitem{Buehler2007}
+S.~Buehler M.~Iagnemma K., Singh.
+\newblock {\em The 2005 DARPAvGrand Challenge: The Great Robot Race},
+  volume~36.
+\newblock Springer, 1st. edition, 2007.
+
+\bibitem{Buehler2009}
+S.~Buehler M.~Iagnemma K., Singh.
+\newblock {\em The DARPA Urban Challenge: Autonomous Vehicles in City Traffic},
+  volume~56.
+\newblock Springer, 1st. edition, 2009.
+
+\bibitem{Kanade:1986:ALV:324634.325197}
+Takeo Kanade, Chuck Thorpe, and William Whittaker.
+\newblock Autonomous land vehicle project at cmu.
+\newblock In {\em Proceedings of the 1986 ACM Fourteenth Annual Conference on
+  Computer Science}, CSC '86, pages 71--80, New York, NY, USA, 1986. ACM.
+
+\bibitem{726791}
+Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
+\newblock Gradient-based learning applied to document recognition.
+\newblock {\em Proceedings of the IEEE}, 86(11):2278--2324, Nov 1998.
+
+\bibitem{DBLP:journals/corr/LinDGHHB16}
+Tsung{-}Yi Lin, Piotr Doll{\'{a}}r, Ross~B. Girshick, Kaiming He, Bharath
+  Hariharan, and Serge~J. Belongie.
+\newblock Feature pyramid networks for object detection.
+\newblock {\em CoRR}, abs/1612.03144, 2016.
+
+\bibitem{DBLP:journals/corr/LiuAESR15}
+Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott~E. Reed,
+  Cheng{-}Yang Fu, and Alexander~C. Berg.
+\newblock {SSD:} single shot multibox detector.
+\newblock {\em CoRR}, abs/1512.02325, 2015.
+
+\bibitem{newlet00}
+Xin C. Wang Z.~Zhang N.~Zheng, J.
+\newblock {\em China future challenge: Beyond the intelligent vehicle},
+  volume~16, pages 8--10.
+\newblock IEEE Intell. Transp. Syst. Soc. Newslett, 2014.
+
+\bibitem{nndd}
+Michael Nielsen.
+\newblock Neural networks and deep learning, Dec. 2017.
+
+\bibitem{parkshuttle}
+University of~Washington.
+\newblock Park shuttle automated driverless vehicle.
+\newblock \url{http://faculty.washington.edu/jbs/itrans/parkshut.htm}, 2009.
+
+\bibitem{Pan:2010:STL:1850483.1850545}
+Sinno~Jialin Pan and Qiang Yang.
+\newblock A survey on transfer learning.
+\newblock {\em IEEE Trans. on Knowl. and Data Eng.}, 22(10):1345--1359, October
+  2010.
+
+\bibitem{NIPS1988_95}
+Dean~A. Pomerleau.
+\newblock Alvinn: An autonomous land vehicle in a neural network.
+\newblock In D.~S. Touretzky, editor, {\em Advances in Neural Information
+  Processing Systems 1}, pages 305--313. Morgan-Kaufmann, 1989.
+
+\bibitem{DBLP:journals/corr/RedmonF16}
+Joseph Redmon and Ali Farhadi.
+\newblock {YOLO9000:} better, faster, stronger.
+\newblock {\em CoRR}, abs/1612.08242, 2016.
+
+\bibitem{DBLP:journals/corr/RenHG015}
+Shaoqing Ren, Kaiming He, Ross~B. Girshick, and Jian Sun.
+\newblock Faster {R-CNN:} towards real-time object detection with region
+  proposal networks.
+\newblock {\em CoRR}, abs/1506.01497, 2015.
+
+\bibitem{DBLP:journals/corr/Ruder16}
+Sebastian Ruder.
+\newblock An overview of gradient descent optimization algorithms.
+\newblock {\em CoRR}, abs/1609.04747, 2016.
+
+\bibitem{DBLP:Russakovsky14}
+Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma,
+  Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael~S. Bernstein,
+  Alexander~C. Berg, and Fei{-}Fei Li.
+\newblock Imagenet large scale visual recognition challenge.
+\newblock {\em CoRR}, abs/1409.0575, 2014.
+
+\bibitem{schj}
+Jürgen Schmidhuber.
+\newblock Prof. schmidhuber's highlights of robot car history.
+\newblock \url{http://people.idsia.ch/~juergen/robotcars.html}, 2009.
+
+\bibitem{DBLP:SimonyanZ14a}
+Karen Simonyan and Andrew Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em CoRR}, abs/1409.1556, 2014.
+
+\bibitem{DBLP:journals/corr/SimonyanZ14a}
+Karen Simonyan and Andrew Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em CoRR}, abs/1409.1556, 2014.
+
+\bibitem{JMLR:v15:srivastava14a}
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan
+  Salakhutdinov.
+\newblock Dropout: A simple way to prevent neural networks from overfitting.
+\newblock {\em Journal of Machine Learning Research}, 15:1929--1958, 2014.
+
+\bibitem{DBLP:SzegedyLJSRAEVR14}
+Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott~E. Reed,
+  Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich.
+\newblock Going deeper with convolutions.
+\newblock {\em CoRR}, abs/1409.4842, 2014.
+
+\bibitem{szeliski2011computer}
+Richard Szeliski.
+\newblock Computer vision algorithms and applications, 2011.
+
+\bibitem{DBLP:Tang13}
+Yichuan Tang.
+\newblock Deep learning using support vector machines.
+\newblock {\em CoRR}, abs/1306.0239, 2013.
+
+\bibitem{6460871}
+T.~Wang, D.~J. Wu, A.~Coates, and A.~Y. Ng.
+\newblock End-to-end text recognition with convolutional neural networks.
+\newblock In {\em Proceedings of the 21st International Conference on Pattern
+  Recognition (ICPR2012)}, pages 3304--3308, Nov 2012.
+
+\bibitem{5597822}
+R.~G.~J. Wijnhoven and P.~H.~N. de~With.
+\newblock Fast training of object detection using stochastic gradient descent.
+\newblock In {\em 2010 20th International Conference on Pattern Recognition},
+  pages 424--427, Aug 2010.
+
+\bibitem{DBLP:journals/corr/YosinskiCBL14}
+Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson.
+\newblock How transferable are features in deep neural networks?
+\newblock {\em CoRR}, abs/1411.1792, 2014.
+
+\bibitem{DBLP:ZhouHSZ16}
+Jing Zhou, Xiaopeng Hong, Fei Su, and Guoying Zhao.
+\newblock Recurrent convolutional neural network regression for continuous pain
+  intensity estimation in video.
+\newblock {\em CoRR}, abs/1605.00894, 2016.
+
+\end{thebibliography}

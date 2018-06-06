@@ -1,0 +1,61 @@
+% set a to be done
+\usepackage[textwidth=1.6cm]{todonotes}
+\usepackage{xpatch}
+
+\def\resetnamelevel#1{%
+    \ifnum#1<1\let\thischaptername\relax\fi
+    \ifnum#1<2\let\thissectionname\relax\fi
+    \ifnum#1<3\let\thissubsectionname\relax\fi
+    \ifnum#1<4\let\thissubsubsectionname\relax\fi
+}\resetnamelevel{0}
+
+\def\chaptername#1{\resetnamelevel{0}\def\thischaptername{#1}}
+\def\sectionname#1{\resetnamelevel{1}\def\thissectionname{#1}}
+\def\subsectionname#1{\resetnamelevel{2}\def\thissubsectionname{#1}}
+\def\subsubsectionname#1{\resetnamelevel{3}\def\thissubsubsectionname{#1}}
+
+\let\Chaptermark\chaptermark
+\let\Sectionmark\sectionmark
+\let\Subsectionmark\subsectionmark
+\let\Subsubsectionmark\subsubsectionmark
+\def\chaptermark#1{\chaptername{#1}\Chaptermark{#1}}
+\def\sectionmark#1{\sectionname{#1}\Sectionmark{#1}}
+\def\subsectionmark#1{\subsectionname{#1}\Subsectionmark{#1}}
+\def\subsubsectionmark#1{\subsubsectionname{#1}\Subsubsectionmark{#1}}
+
+\makeatletter
+\newcommand\treeloc{%
+    \ifx\thischaptername\relax%
+        ??\@latex@warning{\textbackslash treeloc called outside of structure}
+    \else
+        \thischaptername%
+        \ifx\thissectionname\relax%
+        \else
+            \ /\ \thissectionname%
+            \ifx\thissubsectionname\relax%
+            \else
+                \ /\ \thissubsectionname%
+                \ifx\thissubsubsectionname\relax%
+                \else
+                    \ /\ \thissubsubsectionname%
+                \fi
+            \fi
+        \fi
+    \fi
+    }
+\makeatother
+
+\newcommand\tbd{%
+    \todo[caption={TBD: \expandafter\treeloc}]{TBD}
+}
+
+
+%add an extra level of sections
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}

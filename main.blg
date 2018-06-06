@@ -1,0 +1,95 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+A level-1 auxiliary file: motivation.aux
+A level-1 auxiliary file: contributions.aux
+A level-1 auxiliary file: autonomous_driving.aux
+A level-1 auxiliary file: deep_learning.aux
+A level-1 auxiliary file: computer_vision.aux
+A level-1 auxiliary file: overview.aux
+A level-1 auxiliary file: data_and_abelling.aux
+A level-1 auxiliary file: cvt_network.aux
+A level-1 auxiliary file: inference.aux
+The style file: plain.bst
+Database file #1: reference.bib
+Warning--entry type for "historyad" isn't style-file defined
+--line 125 of file reference.bib
+I was expecting a `,' or a `}'---line 130 of file reference.bib
+ :  
+ :  OPTorganization = {"Wikipedia"}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 185 of file reference.bib
+ :   
+ :   lastaccessed = "Mar 06, 2018",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 336 of file reference.bib
+ : @article{DBLP:SimonyanZ14a
+ :                           ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "BMVA" isn't style-file defined
+--line 394 of file reference.bib
+Warning--entry type for "szeliski2011computer" isn't style-file defined
+--line 410 of file reference.bib
+Repeated entry---line 705 of file reference.bib
+ : @book{Goodfellow-et-al-2016
+ :                            ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "CS231N" isn't style-file defined
+--line 774 of file reference.bib
+Warning--entry type for "One-hot" isn't style-file defined
+--line 781 of file reference.bib
+Name 1 in "," has a comma at the end for entry J3016_201401
+while executing---line 1049 of file plain.bst
+Warning--to sort, need author or key in pawtc
+Warning--to sort, need author or key in nohand
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1049 of file plain.bst
+Warning--to sort, need author or key in historyad
+Warning--to sort, need author or key in BMVA
+Warning--to sort, need author or key in CS231N
+Warning--to sort, need author or key in One-hot
+Warning--empty author in pawtc
+Name 1 in "," has a comma at the end for entry J3016_201401
+while executing---line 1090 of file plain.bst
+Warning--empty journal in Jayalakshmi2011
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2007
+while executing---line 1090 of file plain.bst
+Warning--empty chapter and pages in Buehler2007
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "K., Singh, S., Buehler, M., Iagnemma" for entry Buehler2009
+while executing---line 1090 of file plain.bst
+Warning--empty chapter and pages in Buehler2009
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "N. Zheng, J., Xin, C., Wang, Z., Zhang" for entry newlet00
+while executing---line 1090 of file plain.bst
+(There were 26 error messages)

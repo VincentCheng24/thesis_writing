@@ -1,0 +1,480 @@
+\ifglsentryexists{DDT}{}%
+{%
+\gls@defglossaryentry{DDT}%
+{%
+name={DDT},%
+sort={DDT},%
+type={acronym},%
+first={Dynamic Driving Task\glsspace (DDT)},%
+firstplural={Dynamic Driving Tasks\glsspace (DDTs)},%
+text={DDT},%
+plural={DDTs},%
+description={Dynamic Driving Task},%
+descriptionplural={Dynamic Driving Task\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Dynamic Driving Task},%
+longplural={Dynamic Driving Tasks},%
+short={DDT},%
+shortplural={DDTs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{OEDR}{}%
+{%
+\gls@defglossaryentry{OEDR}%
+{%
+name={OEDR},%
+sort={OEDR},%
+type={acronym},%
+first={Object and Event Detection and Response\glsspace (OEDR)},%
+firstplural={Object and Event Detection and Responses\glsspace (OEDRs)},%
+text={OEDR},%
+plural={OEDRs},%
+description={Object and Event Detection and Response},%
+descriptionplural={Object and Event Detection and Response\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Object and Event Detection and Response},%
+longplural={Object and Event Detection and Responses},%
+short={OEDR},%
+shortplural={OEDRs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ODD}{}%
+{%
+\gls@defglossaryentry{ODD}%
+{%
+name={ODD},%
+sort={ODD},%
+type={acronym},%
+first={Operational Design Domain\glsspace (ODD)},%
+firstplural={Operational Design Domains\glsspace (ODDs)},%
+text={ODD},%
+plural={ODDs},%
+description={Operational Design Domain},%
+descriptionplural={Operational Design Domain\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Operational Design Domain},%
+longplural={Operational Design Domains},%
+short={ODD},%
+shortplural={ODDs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ADS}{}%
+{%
+\gls@defglossaryentry{ADS}%
+{%
+name={ADS},%
+sort={ADS},%
+type={acronym},%
+first={Active Safety Systems\glsspace (ADS)},%
+firstplural={Active Safety Systemss\glsspace (ADSs)},%
+text={ADS},%
+plural={ADSs},%
+description={Active Safety Systems},%
+descriptionplural={Active Safety Systems\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Active Safety Systems},%
+longplural={Active Safety Systemss},%
+short={ADS},%
+shortplural={ADSs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{DARPA}{}%
+{%
+\gls@defglossaryentry{DARPA}%
+{%
+name={DARPA},%
+sort={DARPA},%
+type={acronym},%
+first={The Defense Advanced Research Projects Agency\glsspace (DARPA)},%
+firstplural={The Defense Advanced Research Projects Agencys\glsspace (DARPAs)},%
+text={DARPA},%
+plural={DARPAs},%
+description={The Defense Advanced Research Projects Agency},%
+descriptionplural={The Defense Advanced Research Projects Agency\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={The Defense Advanced Research Projects Agency},%
+longplural={The Defense Advanced Research Projects Agencys},%
+short={DARPA},%
+shortplural={DARPAs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{DL}{}%
+{%
+\gls@defglossaryentry{DL}%
+{%
+name={DL},%
+sort={DL},%
+type={acronym},%
+first={Deep Learning\glsspace (DL)},%
+firstplural={Deep Learnings\glsspace (DLs)},%
+text={DL},%
+plural={DLs},%
+description={Deep Learning},%
+descriptionplural={Deep Learning\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Deep Learning},%
+longplural={Deep Learnings},%
+short={DL},%
+shortplural={DLs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SVM}{}%
+{%
+\gls@defglossaryentry{SVM}%
+{%
+name={SVM},%
+sort={SVM},%
+type={acronym},%
+first={Support Vector Machine\glsspace (SVM)},%
+firstplural={Support Vector Machines\glsspace (SVMs)},%
+text={SVM},%
+plural={SVMs},%
+description={Support Vector Machine},%
+descriptionplural={Support Vector Machine\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Support Vector Machine},%
+longplural={Support Vector Machines},%
+short={SVM},%
+shortplural={SVMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{CNN}{}%
+{%
+\gls@defglossaryentry{CNN}%
+{%
+name={CNN},%
+sort={CNN},%
+type={acronym},%
+first={Convolutional Neural Network\glsspace (CNN)},%
+firstplural={Convolutional Neural Networks\glsspace (CNNs)},%
+text={CNN},%
+plural={CNNs},%
+description={Convolutional Neural Network},%
+descriptionplural={Convolutional Neural Network\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Convolutional Neural Network},%
+longplural={Convolutional Neural Networks},%
+short={CNN},%
+shortplural={CNNs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ILSVRC}{}%
+{%
+\gls@defglossaryentry{ILSVRC}%
+{%
+name={ILSVRC},%
+sort={ILSVRC},%
+type={acronym},%
+first={Large Scale Visual Recognition Challenge\glsspace (ILSVRC)},%
+firstplural={Large Scale Visual Recognition Challenges\glsspace (ILSVRCs)},%
+text={ILSVRC},%
+plural={ILSVRCs},%
+description={Large Scale Visual Recognition Challenge},%
+descriptionplural={Large Scale Visual Recognition Challenge\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Large Scale Visual Recognition Challenge},%
+longplural={Large Scale Visual Recognition Challenges},%
+short={ILSVRC},%
+shortplural={ILSVRCs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{}{}%
+{%
+\gls@defglossaryentry{}%
+{%
+name={},%
+sort={},%
+type={acronym},%
+first={\glsspace ()},%
+firstplural={s\glsspace (s)},%
+text={},%
+plural={s},%
+description={},%
+descriptionplural={\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={s},%
+short={},%
+shortplural={s},%
+counter={page},%
+parent={},%
+%
+}%
+}%
