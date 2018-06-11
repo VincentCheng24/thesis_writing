@@ -116,10 +116,11 @@ The visibility of each point is determined by its position, \ie the 2D coordinat
 
 
 \paragraph{Template Proximity}
+\label{template}
 
 Template proximity of one vehicle is encoded as a vector $\mathit{T_{i}}$ which is defined as $\mathit{T}_i = \{r_k\}_{k \in \{1,.., K\}}$, where $\mathit{K}$ denotes the number of 3D vehicle models and  $r_k~=~(r_h,r_w,r_l)$ corresponds to three scaling ratios between the dimensions (\ie height, width, and length) of each model and the vehicle's respectively. The vector $\mathit{T_{i}}$ represents the similarity between each model and the vehicle. The most similar model is the one whose $r_k$ is closest to $(1, 1, 1)$.
 
 \subsubsection{Notations}
-In sum, based on the KITTI image and 3D vehicle models, each vehicle can be defined by six critical attributes:
-\[  \{B^{2d}, ~B^{3d}, ~C^{2d}, ~C^{3d}, ~V, ~T\}  \]
-$B^{2d} = (c_u, c_v, w, h)$ defines the 2D bounding box in image with $(c_u, c_v)$ denoting its center,  $w$ for its width and $h$ for its height. $B^{3d} = (o, \theta, d)$ where $o = (c_x, c_y, c_z)$ is the center, $\theta$ is the rotation ry around the yaw axis, and $d = (w, h, l)$ is its dimensions. $C^{2d}  = \{(u_i, v_i)\}_{i \in \{1, ...,20\}}$ represents the 2D part coordinates in image plane, while $C^{3d}  = \{(x_i, y_i, z_i)\}_{i \in \{1, ...,20\}}$ denotes the 3D part coordinates in world coordinate system. $V = \{v_i\}_{i \in \{1, ...,20\}}$ is the visibility for all the characteristic points in the vehicle.  $T = \{(r_{hk},r_{wk},r_{lk})\}_{i \in \{1, ...,54\}}$ is the template proximity vector.
+In sum, based on the KITTI image and 3D vehicle models, each vehicle can be defined by seven critical attributes:
+\[  \{D, B^{2d}, ~B^{3d}, ~C^{2d}, ~C^{3d}, ~V, ~T\}  \]
+$D = (h, w, l)$ represents the dimensions of the vehicle. $B^{2d} = (c_u, c_v, w, h)$ defines the 2D bounding box in image with $(c_u, c_v)$ denoting its center,  $w$ for its width and $h$ for its height. $B^{3d} = (o, \theta, d)$ where $o = (c_x, c_y, c_z)$ is the center, $\theta$ is the rotation ry around the yaw axis, and $d = (w, h, l)$ is its dimensions. $C^{2d}  = \{(u_i, v_i)\}_{i \in \{1, ...,20\}}$ represents the 2D part coordinates in image plane, while $C^{3d}  = \{(x_i, y_i, z_i)\}_{i \in \{1, ...,20\}}$ denotes the 3D part coordinates in world coordinate system. $V = \{v_i\}_{i \in \{1, ...,20\}}$ is the visibility for all the characteristic points in the vehicle.  $T = \{{(r_{h},r_{w},r_{l})}_k\}_{k \in \{1, ...,54\}}$ is the template proximity vector.

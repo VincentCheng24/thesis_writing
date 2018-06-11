@@ -30,6 +30,7 @@ Modern cameras are built on lenses that can gather more light to make the image 
 \end{figure}
 
 \subsubsection{Intrinsic and Extrinsic Parameters}
+\label{projection}
 
 To project a 3D point in the world coordinate system, first we have to transform this point to the camera coordinate system and then transform it to the image plane. The first transformation depends on the extrinsic parameters while the second rely on intrinsic parameters.
 
@@ -73,7 +74,7 @@ $P^{C}$ and $P^W$ are coordinates of the same point expressed in world coordinat
 To put it all together, the projection equation in homogeneous coordinates is 
 \begin{equation}
 \label{eq5}
-p = \frac{1}{z} M P^W = \frac{1}{z} K c
+p = \frac{1}{z} M P^W = \frac{1}{z} K
 \begin{pmatrix}
 R & t\\ 
 0^T& 1

@@ -17,7 +17,7 @@ Y = l_L(...l_2(l_1(X))), where ~Y \in {\mathbb{R}^M}, ~X \in {\mathbb{R}^N}
 
 Even through there are various layers, most layers  is composed of neurons, the basic computation element and most neurons are realized by linear and non-linear operations as 
 \begin{equation}
-a_{ij} = \sigma(X_i^T W_{ij}+b_j)
+a_{ij} = \sigma(W_{ij}^T X_i +b_j)
 \end{equation}
 
 where $a_{ij}$ is the result of the $i_th$ neuron in the $j_th$ layer, $\sigma$ is the activation function and $W_ij$ and $b_j$ are the weights vector and bias applied to input vector $X_i$.  The pooling layer is a special case which performs downsampling operations, such as max pooling \cite{Boureau:2010} and average pooling \cite{6460871}.
@@ -41,7 +41,7 @@ The hidden layers in out network consist of a feature extractor, 3 residual bloc
 
 The feature extractor is actually one of available neural network models built in the Keras library \cite{chollet2015keras}, \ie VGG16, VGG19, Xception, ResNet50, \etc It is trained to  learn deep distributed hierarchical nonlinear representations of the input images.
 
- ResNet50 \cite{DBLP:journals/corr/HeZRS15} is chosen to be the benchmark model because it can ease the training and accelerate the convergence, especially for the fine tuning. It is well known that there are two main obstacles that hamper the training of deep neural networks: the vanishing/exploding gradient problem \cite{Bengio:1994:LLD:2325857.2328340} \cite{pmlr-v9-glorot10a} and the degradation problem that as the network is built deeper, the accuracy gets saturated or even degrades sharply \cite{DBLP:journals/corr/He014}. Residual nets are designed to address these two problems. Instead of learning the direct mapping from input to output, it learns a residual mapping first and then add the input to it, which just as Figure \ref{figure:residual_blocks} (a) shows. The paper validates that it is easier to learn the residual mapping than the direct one and the gradient can always pass through along the shortcut connections. Figure \ref{figure:residual_blocks} (b) and (c) shows two building blocks in our network. (b) is an identity block where the dimensions of input and output matches, while (c) is a linear projection block where the right branch performs $1\times1$ convolution to match the dimensions because the final addition is performed element-wisely.
+ ResNet50 \cite{DBLP:journals/corr/HeZRS15} is chosen to be the benchmark model because it can ease the training and accelerate the convergence, especially for the fine tuning. It is well known that there are two main obstacles that hamper the training of deep neural networks: the vanishing/exploding gradient problem \cite{Bengio:1994:LLD:2325857.2328340, pmlr-v9-glorot10a} and the degradation problem that as the network is built deeper, the accuracy gets saturated or even degrades sharply \cite{DBLP:journals/corr/He014}. Residual nets are designed to address these two problems. Instead of learning the direct mapping from input to output, it learns a residual mapping first and then add the input to it, which just as Figure \ref{figure:residual_blocks} (a) shows. The paper validates that it is easier to learn the residual mapping than the direct one and the gradient can always pass through along the shortcut connections. Figure \ref{figure:residual_blocks} (b) and (c) shows two building blocks in our network. (b) is an identity block where the dimensions of input and output matches, while (c) is a linear projection block where the right branch performs $1\times1$ convolution to match the dimensions because the final addition is performed element-wisely.
 
 \begin{figure}[h]		
 	\includegraphics[width=1\textwidth]{residual_blocks.png}
@@ -52,6 +52,14 @@ The feature extractor is actually one of available neural network models built i
 
 The last three residual blocks and a fully-connected layer is designed to learn non-linear combinations of the extracted features and then forward them to the output layers.
 
+For all hidden layers, we all apply ReLU as the activation function. The function is
+
+\begin{equation}
+\label{relu}
+f(z) = \max \{0, z\} ~~~~where~ z = W^TX+b
+\end{equation}
+This is a piecewise linear function consisting of two linear pieces, which makes the gradients through a rectified linear unit stay large and consistent whenever the unit is active. Papers \cite{pmlr-v15-glorot11a, Nair:2010:RLU:3104322.3104425, DBLP:journals/corr/JarrettKGL16} have validated that networks activated by ReLU can achieve much better performance than others. ReLU preserves many properties that make the model easy to optimize with gradient-based methods and generalize well, while introducing non-linearity into the model \cite{Goodfellow-et-al-2016}. 
+
 \paragraph{Output Layers}
 \label{output}
 
@@ -59,12 +67,12 @@ Our network has three kinds of output layer for the three tasks respectively. Fo
 
 \begin{equation}
 \label{linear}
-out_i = X_i^T W_i+b_i
+out_i = W_i^TX_i+b_i
 \end{equation}
 
 \begin{equation}
 \label{softmax}
-p_i = \frac{e^{X_i^TWi+b_i}}{\sum_{k=1}^K e^{X_k^TW_k+b_k}}
+out_i = \frac{e^{W_i^TX_i+b_i}}{\sum_{k=1}^K e^{W_k^TX_k+b_k}}
 \end{equation}
 
 
@@ -106,7 +114,7 @@ Normalization is an important pre-processing step in deep learning which ensures
 	\label{figure:contour}
 \end{figure}
 
-Our network takes RGB images as input so that pixel intensity is the input feature. The technique we use to normalize the image is channel mean subtraction, used in \cite{DBLP:journals/corr/SimonyanZ14a}, \cite{DBLP:journals/corr/GirshickDDM13}, which centers all the features around the origin along each dimension.As mentioned in CS231N \cite{CS231N}, mean channel subtraction is enough for CNNs and the original range of pixel values is determined, \ie $[0, 255]$.
+Our network takes RGB images as input so that pixel intensity is the input feature. The technique we use to normalize the image is channel mean subtraction, used in \cite{DBLP:journals/corr/SimonyanZ14a, DBLP:journals/corr/GirshickDDM13}, which centers all the features around the origin along each dimension.As mentioned in CS231N \cite{CS231N}, mean channel subtraction is enough for CNNs and the original range of pixel values is determined, \ie $[0, 255]$.
 
 The range of ground truth influences the loss. In order to make the three labels impact similarly on the loss, we normalize them. For visibility, we use one-hot-encoding \cite{One-hot} to encode its classes so that it only has value 0 or 1. The value of 2D coordinates $C^{2d}  = \{p_1, p_2, ...,p_{20}\}$varies a lot so that we normalize them w.r.t. the associated 2D bounding box $B^{2d} = (c_u, c_v, w, h)$ \cite{DBLP:journals/corr/ChabotCRTC17}. The normalized 2D coordinates $\overline{C}^{2d}  = \{\overline{p}_1, \overline{p}_2, ...,\overline{p}_{20}\}$ ranges $[-1, 1]$, where
 \begin{equation}
@@ -146,15 +154,45 @@ Therefore we initialize our feature extractor with parameters learned on ImageNe
 
 \paragraph{Learning Algorithms / Optimization}
 
+Optimization is a task of finding the value $x$ in order to minimize or maximize some objective function $f(x)$. One most powerful optimization technique category in deep learning is gradient-based.
 
+As is known, the derivative $f'(x)=\frac{\text{d}y}{\text{d}x}$ specifies how to make a small change $\epsilon$ of the input $x$ to get the corresponding change in the function:
+\begin{equation}
+	f(x + \epsilon)~ \approx ~ f(x) + \epsilon f'(x).
+\end{equation}
 
+Thus, the derivative tells the direction to minimize a function, i.e. it can point out how to change $x$ to make a small update. One popular algorithm, gradient descent \cite{gd1847}, makes use of the derivatives and update the input $x$ directly as:
 
+\begin{equation}
+x = x - \alpha {\triangledown} _x f(x)
+\end{equation}
 
+where $\alpha$ is the learning rate, a positive real value to decide the size of an update step. The examples in Figure \ref{figure:optimization} (a) show how the update works.  A deep network often consists of many layers so that back-propagation algorithm \cite{Rumelhart:1988:LRB:65669.104451} is used to compute the gradient for each parameter in different layers of the objective function based on the chain rule of calculus.
 
+\begin{figure}[h]		
+	\includegraphics[width=1\textwidth]{optimization.png}
+	\caption{(a). examples to show how gradient decent makes use of derivatives to reach a minimum \cite{Goodfellow-et-al-2016}, (b). performance of optimization algorithms in the same setting \cite{DBLP:journals/corr/KingmaB14}}
+	\centering
+	\label{figure:optimization}
+\end{figure}
 
+In deep learning, the input to the objective function is often multidimensional so that it probably has many local minima and saddle points, which renders huge difficulties to optimization. Therefore we usually take in a compromise scenario where the value $x$ makes $f$ really low but not necessarily globally minimal \cite{Goodfellow-et-al-2016}.
 
+The optimization algorithm we used is Adam \cite{DBLP:journals/corr/KingmaB14} which is robust and efficient in memory and computation for the optimization of stochastic objectives with high-dimensional parameters spaces. It makes use of both the gradient and its momentum to update parameters as: 
 
+\begin{algorithm}[H]	
+	\While{$x_t$ not converged}{
+		$ t = t + 1 $\;
+		$ g_t = {\triangledown} _x f(x_{t-1}) $\;
+		$ m_t = \beta_1 m_{t-1} + (1-\beta _1) g_t$ \;
+		$ v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 $\;
+		$ \hat{m}_t = \frac{m_t}{1 - \beta _1^t} $\;
+		$ \hat{v}_t = \frac{v_t}{1 - \beta_2^t}  $\;
+		$ x_t = x_{t-1} - \alpha \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$\;
+	}
+	%\caption{Adam algorithm update mechanism}
+\end{algorithm}
 
+where $ t $ denotes the current iteration, $\alpha$ is the learning rate, $\beta_1$ and $\beta_2$ are two exponential decay rates, and $\epsilon$ is a small scalar to prevent zero-division.
 
-
-
+From the Figure \ref{figure:optimization} (b), we can see that Adam can make the learning task converge relatively faster and has lower training error so that we follow this guide to apply Adam in our optimization of CVT Network.
