@@ -1,0 +1,11 @@
+
+test*.
+*.aux
+*.log
+*.bbl
+*.acn
+*.blg
+*.glo
+*.glsdefs
+*.ist
+*.gz
