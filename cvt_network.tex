@@ -103,6 +103,13 @@ L_{cce} =\frac{1}{N} \sum_{n=1}^N H(y,\widehat{y}) = -\frac{1}{N}\sum_{n=1}^N \s
 
 where $H(y, \widehat{y})$ denotes the cross-entropy between the ground truth probability distribution $y$ and the predicted $\widehat{y}$, and $y_{n,i} $ represents the true probability of $i_{th}$ class for the $n_{th}$ data example $\widehat{y}_{n,i}$ is the estimated. It is a continuous convex loss function which measures the discrepancy between the true and estimated distributions multi-class classification tasks \cite{DBLP:journals/corr/abs-1802-09941} which means it can measure the degree of correctness, \ie it can distinguish between "nearly correct" and "totally wrong" cases.  Therefore, it outperforms other loss functions in classification tasks and then becomes ubiquitous in deep learning nowadays.
 
+Therefore the total loss for all tasks is
+\begin{equation}
+\label{eq12}
+L_{total} = \lambda_{coord} L_{coord} + \lambda_{temp} L_{temp} + \lambda_{visib} L_{visib}
+\end{equation}
+
+where $\lambda_{coord}, \lambda_{temp}$, and $\lambda_{visib}$ are loss weights for these three kinds of tasks respectively. Loss with higher weights has more impact on the gradients and thus tunes the parameters perform better for its corresponding task.
 
 \paragraph{Normalization}
 Normalization is an important pre-processing step in deep learning which ensures that each feature has a similar data distribution. This is usually done by restricting the features in certain range or standardizing their ranges. It can enhance the learning capability of the network and speed up the convergence substantially  because it can reduce the bias among features and decrease the low and high frequency noisy in data \cite{Jayalakshmi2011}. The speed-up mechanism can be concluded from Figure \ref{figure:contour}. If we initialize the network at point A in Figure \ref{figure:contour} (a), the gradient-descent update routine will oscillate along the long axis of the eclipse, which definitely takes more time to reach the optimum than any arbitrary initial point in Figure \ref{figure:contour} (b) where the update trajectory is almost a straight line for any starting point  to the minimum. Besides, this also helps the performance because the update trajectory oscillates less around the minimum for case (b) than case (a) so that it is more possible for case (b) to reach the optimum.

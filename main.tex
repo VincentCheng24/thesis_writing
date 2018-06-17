@@ -8,6 +8,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{algorithm2e}
+\usepackage{newclude}
+\usepackage{amsmath}
+\usepackage{cleveref}
 
 \usepackage{longtable}
 \usepackage[acronym]{glossaries}
@@ -19,6 +22,14 @@
 \newcommand{\ie}{\textit{i}.\textit{e}., }
 \newcommand{\eg}{\textit{e}.\textit{g}. }
 \newcommand{\etc}{\textit{etc}.}
+
+%table
+\usepackage{array}
+\usepackage[a4paper]{geometry}
+\usepackage{tabularx}
+\usepackage{lipsum}
+%\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%\newcolumntype{N}{@{}m{0pt}@{}}
 
 % make paragraph start a new line instead of indent
 \usepackage[parfill]{parskip}
@@ -53,30 +64,37 @@
 
 
 \section{Introduction}
-\include{motivation}
-\include{contributions}
+\include*{motivation}
+\include*{contributions}
+\clearpage
 
 \section{Related Work}
+\include*{related_work}
+\clearpage
 
 \section{Background}
-\include{autonomous_driving}
-\include{deep_learning}
-\include{computer_vision}
+\include*{autonomous_driving}
+\include*{deep_learning}
+\include*{computer_vision}
+\clearpage
 
 \section{My Work - Technical Detail}
-\include{overview}
-\include{data_and_abelling}
-\include{cvt_network}
-\include{inference}
+\include*{overview}
+\include*{data_and_abelling}
+\include*{cvt_network}
+\include*{inference}
+\clearpage
 
 \section{Experiment and Evaluation}
-\include{exp_setting}
-\include{evaluation}
-\include{comparison}
+\include*{exp_setting}
+\include*{evaluation}
+\include*{comparison}
+\clearpage
 
 \section{Conclusion and Discussion}
-\include{discussion}
-\include{conlusion}
+\include*{discussion}
+\include*{conlusion}
+\clearpage
 
 \bibliographystyle{plain}
 \bibliography{reference}

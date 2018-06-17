@@ -42,8 +42,6 @@ where $K_{3\times 4}$ is the given camera calibration matrix, $R_{3\times 3}$ an
 \subsubsection{Visualization}
 To visualize the 3D bounding box, we use the vehicle's dimensions to determine the eight corners of the cuboid and then project this cuboid into the image with the projection matrix which composes of the recovered rotation and translation. And in order to show the rotation clearly, project the line on the ground to show the direction of the vehicle. This visualization mechanism is shown in Figure \ref{figure:visualization} (a) where the front face of vehicle is coloured with magenta. Figure \ref{figure:visualization} also shows three typical examples in side view, back view, and front view.
 
-
-
 \begin{figure}[h]		
 	\includegraphics[width=1\textwidth]{visualization.png}
 	\caption{Visualization of 3D bounding box and visibility. (a). visualization mechanism, (b). side view of visualization, (c). back view of visualization, (d). front view of visualization}

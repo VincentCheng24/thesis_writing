@@ -1,0 +1,10 @@
+In this section, we describe the experiment setup, discuss the most crucial design choices for our approach, evaluate our approach and its variations , and compare our approach with the start-of-the-art methods on monocular pose estimation of vehicles.  
+
+template \tbd Experiments are divided into three parts1. First we compare with state-of-the-art methods for 3D object detection on KITTI [10] and SUN-RGBD [33] (Sec 5.1). Second, we provide in-depth analysis to validate our design choices (Sec 5.2). Last, we show qualitative results and discuss the strengths and limitations of our methods (Sec 5.3).
+\subsection{Experiment Setup}
+
+We have presented the approach in Section \ref{network} and \ref{inference} which is served as a benchmark of our approach. Some other design choices are made based on it. The benchmark network use ResNet50 \cite{DBLP:journals/corr/HeZRS15} as feature extractor, initialized with pre-trained weights trained on ImageNet \cite{DBLP:Russakovsky14}, and is trained with Adam \cite{DBLP:journals/corr/KingmaB14}. The network is implemented on Keras \cite{chollet2015keras} using TensorFlow \cite{tensorflow2015-whitepaper} as backend. Keras supports running both on GPU and CPU. 
+
+We evaluate our approach and its variations on the dataset created based on KITTI 3D object detection benchmark \cite{Geiger2012CVPR}, described in Section \ref{data}. Because the KITTI only releases the ground truth for 7481 training images, we split them into train and validation set for training and validation respectively. We follow difficulty division policy of  KITTI and extend to more detailed levels \tbd. We use 54 vehicle CAD models \cite{NIPS2012_4562} for semi-automatic labelling and template matching. Each model is encoded with 20 points for its corresponding 3D sketch.
+
+We evaluate six tasks: 3D vehicle detection, orientation estimation, 3D localization, 3D dimension estimation, 2D part localization, and 2D part visibility prediction. 3D vehicle detection is the ultimate task, representing the localization, orientation, and dimension of 3D bounding box,  which is therefore used to evaluated all the design choices.

@@ -10,6 +10,7 @@ The KITTI 2D/3D object detection challenge is dedicated to autonomous driving an
 	\label{figure:kitti_image}
 \end{figure}
 
+\renewcommand{\arraystretch}{1.2}
 \begin{table}[h]
 	\centering
 	\caption{Label specification of KITTI dataset}
@@ -18,7 +19,7 @@ The KITTI 2D/3D object detection challenge is dedicated to autonomous driving an
 		\begin{tabular}{|c|c|l|}
 			\hline
 			\#Values & Name        & Description                                                                                                                                                             \\ \hline
-			1        & type        & \begin{tabular}[c]{@{}l@{}}Type of object: \\ 'Car', 'Van', 'Truck', 'Cyclist', 'Tram', 'Pedestrian', \\ 'Person\_sitting',  'Misc' or 'DontCare'\end{tabular}          \\ \hline
+			1        & type        & \begin{tabular}[c]{@{}l@{}}Type of object: \\ Car, Van, Truck, Cyclist, Tram, Pedestrian, \\ Person\_sitting,  Misc or DontCare \end{tabular}          \\ \hline
 			1        & truncated   & \begin{tabular}[c]{@{}l@{}}Float from 0 (non-truncated) to 1,\\ indicating the extent of the object out of the image\end{tabular}                                       \\ \hline
 			1        & occluded    & \begin{tabular}[c]{@{}l@{}}Integer indicating occlusion state: \\ 0 = fully visible, 1 = partly occluded, \\ 2 = largely occluded, 3 = unknown\end{tabular}             \\ \hline
 			1        & alpha       & Observation angle of object, ranging {[}-pi..pi{]}                                                                                                                      \\ \hline
@@ -57,6 +58,7 @@ In order to create the 3D sketches, we implement a labelling tool, shown in Figu
 
 Our approach requires three extra kinds of labels to training the CVT Network, \ie 2D coordinates and visibility property of characteristic points and template proximity, as shown in Table \ref{new_label}.  Labelling is never a trivial task. Due to the demanding workload of manual labelling and the cases where it is almost impossible to label the small vehicles in image manually, we propose an automatic label generation method. It is able to make use of the 3D vehicle dataset and the KITTI dataset to generate these three additional kinds of ground truth.
 
+\renewcommand{\arraystretch}{1.2}
 \begin{table}[h]
 	\centering
 	\caption{Specification of three additional labels}
