@@ -4,9 +4,15 @@ We use intersection over union (IoU) to measure the performance of 3D vehicle de
 \begin{equation}
 	IoU(b_1, b_2) = \frac{V(b_{pre}\cap b_{gt})}{V(b_{pre}\cup b_{gt})}
 \end{equation}
-where $V(\cdot)$ indicates the volume and $b_{pre}$ denotes the predicted 3D bounding box while $b_{gt}$ is the ground truth. KITTI judges a 3D object detection is correct, if $IoU \geq 0.7$. But in our experiment, we lower the criterion to $IoU \geq 0.5$. If multiple bounding boxes are predicted for one vehicle, they are considered as false predictions.
+where $V(\cdot)$ indicates the volume and $b_{pre}$ denotes the predicted 3D bounding box while $b_{gt}$ is the ground truth. KITTI 3D object detection benchmark considers that a 3D object detection is correct, if $IoU \geq 0.5$ \cite{Geiger2012CVPR}. If multiple bounding boxes are predicted for one vehicle, they are considered as false predictions. %{But in our experiment, we lower the criterion to $IoU \geq 0.5$.}% 
 
-For orientation estimation, we consider the estimation correct if its difference from the ground truth is less than 0.2 rad. For other tasks, We follow the metrics set by \cite{DBLP:journals/corr/ChabotCRTC17}. A 3D localization is considered correct if its distance to the ground truth is less than a threshold. Two thresholds, 1 meter and 2 meters, are chosen. 2D part localization are measured the same way and the threshold is 20 pixels. 3D dimension estimation is correct if the predicted dimensions $(h, w, l)$ satisfies the equation
+For 3D orientation estimation, we use the measure,Orientation Score (OS), defined in \cite{DBLP:journals/corr/MousavianAFK16}. It is the mean error across all estimations in the validation set, written as:
+\begin{equation}
+	OS =\frac{1}{N} \sum_{i=1}^N\frac{(1+\cos(\triangle \theta_i))}{2}
+\end{equation}
+where $N$ denotes the number of examples in the validation set and $\triangle \theta_i$ represents the difference between the predicted orientation $r_y$ and the ground truth for example $i$.
+
+ For other tasks, We follow the metrics set by \cite{DBLP:journals/corr/ChabotCRTC17}. A 3D localization is considered correct if its distance to the ground truth is less than a threshold. Two thresholds, 1 meter and 2 meters, are chosen. 2D part localization are measured the same way and the threshold is 20 pixels. 3D dimension estimation is correct if the predicted dimensions $(h, w, l)$ satisfies the equation
 \begin{equation}
 	\left | \frac{h-h_{gt}}{h_{gt}} \right | < 0.2  ~~\&~~\left | \frac{w-w_{gt}}{w_{gt}} \right | < 0.2  ~~\&~~ \left | \frac{l-l_{gt}}{l_{gt}} \right | < 0.2
 \end{equation}
@@ -23,7 +29,7 @@ Mean distance error (MDE) \tbd
 		\hline
 		Task                    & Metric         \\ \hline
 		3D vehicle detection    & $IoU \geq 0.5$ \\  \hline
-		Orientation estimation  & $|r_{pre} - r_{gt}|  < 0.2$ rad     \\ \hline
+		3D orientation estimation  & $OS$     \\ \hline
 		3D localization         &$\bf \lVert \overline t_{pre} - \overline t_{gt} \rVert$ $< 1 / 2$ meters   \\ \hline
 		3D dimension estimation & $\left | \frac{d-d_{gt}}{d_{gt}} \right | _{d =\{h,w,l\}}<  20\%$           \\ \hline
 		2D part localization    & $ \bf \lVert \overline p_{pre} - \overline p_{gt} \rVert $$<  20$ pixels      \\ \hline

@@ -32,6 +32,7 @@ The KITTI 2D/3D object detection challenge is dedicated to autonomous driving an
 \end{table}
 
 \subsubsection{3D Vehicle Dataset}
+\label{cad_models}
 This dataset is intended to encode the diversity of vehicles by means of type, dimension, and chassis shape. It is created based on a selected subset of synthetic 3D CAD models\cite{NIPS2012_4562}. We only include the well-aligned and  symmetrical models, and also take the dimension and type into consideration. We classify all the models into six categories: Mini, Hatchback, Sedan, SUV, Wagon, and Van. And for each category,  subcategories are marked out according to their dimensions and shapes in order to make a refined selection.  The statistic of dimensions is well distributed and each existing car can be classified into one category exclusively.
 
 \begin{figure}[h]		
@@ -96,6 +97,7 @@ Our approach requires three extra kinds of labels to training the CVT Network, \
 
 
 \paragraph{Visibility}
+\label{visibility}
 
 As an example of the labelled visibility shows in Figure \ref{visibilie_eg}, the visibility property of characteristic points is classified into four scenarios: 
 
