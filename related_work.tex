@@ -6,7 +6,7 @@ One way is to utilize the geometry information of the vehicles. In this category
 Another way is to use temporal information. \cite{7780838, 7298997} make use of motion structure and ground estimation to perform 3D detection from 2D bounding box.
 
 
-These approaches are sensitive to the assumptions made and the parameter estimation accuracy so that they perform poorly on the 3D detection task compared to methods that use point cloud data \tbd.
+These approaches are sensitive to the assumptions made and the parameter estimation accuracy so that they perform poorly on the 3D detection task compared to methods that use point cloud data \tbd. whether it's necessary to assess all these approaches.
 
 \subsection{Stereo RGB Image Based Approaches}
 A pair of stereo RGB images can provide the depth information of the current scene. 3DOP \cite{DBLP:journals/corr/ChenKZMFU16} recovers depth from stereo images and generates 3D box proposals with the constraints from depth and other geometry characters, which are forwarded to modified Fast R-CNN \cite{DBLP:journals/corr/Girshick15} pipeline for object detection and pose estimation. \cite{PHAM2017110} extends 3DOP by applying a separate CNN to extract features from depth and integrating them together for the final 3D detection.

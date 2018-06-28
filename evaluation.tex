@@ -4,7 +4,7 @@ We use intersection over union (IoU) to measure the performance of 3D vehicle de
 \begin{equation}
 	IoU(b_1, b_2) = \frac{V(b_{pre}\cap b_{gt})}{V(b_{pre}\cup b_{gt})}
 \end{equation}
-where $V(\cdot)$ indicates the volume and $b_{pre}$ denotes the predicted 3D bounding box while $b_{gt}$ is the ground truth. KITTI 3D object detection benchmark considers that a 3D object detection is correct, if $IoU \geq 0.5$ \cite{Geiger2012CVPR}. If multiple bounding boxes are predicted for one vehicle, they are considered as false predictions. %{But in our experiment, we lower the criterion to $IoU \geq 0.5$.}% 
+where $V(\cdot)$ indicates the volume and $b_{pre}$ denotes the predicted 3D bounding box while $b_{gt}$ is the ground truth. KITTI 3D object detection benchmark considers that a 3D object detection is correct, if $IoU \geq 0.7$ \cite{Geiger2012CVPR}. If multiple bounding boxes are predicted for one vehicle, they are considered as false predictions. %{But in our experiment, we lower the criterion to $IoU \geq 0.5$.}% 
 
 For 3D orientation estimation, we use the measure,Orientation Score (OS), defined in \cite{DBLP:journals/corr/MousavianAFK16}. It is the mean error across all estimations in the validation set, written as:
 \begin{equation}
@@ -18,7 +18,7 @@ where $N$ denotes the number of examples in the validation set and $\triangle \t
 \end{equation}
 where $(h_{gt}, w_{gt}, l_{gt})$ is the ground truth. 2D part visibility prediction is a pure classification problem so that the measure is the accuracy over 4 classes.
 
-Mean distance error (MDE) \tbd
+Mean distance error (MDE) \tbd research it to check whether it's necessary to use this
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[ht]
@@ -29,8 +29,8 @@ Mean distance error (MDE) \tbd
 		\hline
 		Task                    & Metric         \\ \hline
 		3D vehicle detection    & $IoU \geq 0.5$ \\  \hline
-		3D orientation estimation  & $OS$     \\ \hline
 		3D localization         &$\bf \lVert \overline t_{pre} - \overline t_{gt} \rVert$ $< 1 / 2$ meters   \\ \hline
+		3D orientation estimation  & $OS$     \\ \hline
 		3D dimension estimation & $\left | \frac{d-d_{gt}}{d_{gt}} \right | _{d =\{h,w,l\}}<  20\%$           \\ \hline
 		2D part localization    & $ \bf \lVert \overline p_{pre} - \overline p_{gt} \rVert $$<  20$ pixels      \\ \hline
 		2D part visibility      &     $V_{pre} = V_{gt}$         \\ \hline
