@@ -1,9 +1,11 @@
 \subsection{Design Choices}
+\label{d_choices}
 
 \subsubsection{Model Selection Strategy}
 We have mentioned in Section \ref{data} that we match the vehicles with models based on dimension similarity. Now we give the reasons why we choose this strategy. The first reason is that the distribution of models' dimension covers the KITTI vehicles'. Besides, this strategy achieves the best performance among possible strategies as shown in Table \ref{model_selection}. The CAD model dataset provides two sets of dimensions: real-world dimensions and  uniform dimensions where all the width is 1.8 meters. Dims strategy means that the best model is the one whose dimension vector has the least distance to the vehicle's. Dim Ratios strategy is similar but bases on the ratio vector $(height/width, length/width)$ with the uniform dimensions given by the CAD dataset. The rest two are based on Dims and Dim Ratios, \ie using one strategy to select 10 models first and then applying the other to select the best one.
 
 We use two metrics to evaluate these strategies: type accuracy and mean deviation. The types are defined as in Figure \ref{figure:vehicle_dataset}. Vehicle types can present the location of characteristic points of vehicles well because the vehicles' 3D sketches varies a lot among different types but keeps similar with the same type and the dimension variation can be solved via scaling. Therefore we label 1000 KITTI vehicles and test the type matching accuracy among these strategies. The second metric, mean deviation, is the Euclidean distance between the dimension vectors of the selected model and ground truth. Even through the performance of Dims is not that good, it is the best one we can use based on the information provided. Figure \ref{figure:model_selection_s} shows one labelled example where Dims has the most accurate points labelled and the others all label the points around the back wheel wrongly.
+\tbd [is it ok to put these bad results here]
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[ht]
@@ -30,6 +32,7 @@ We use two metrics to evaluate these strategies: type accuracy and mean deviatio
 
 \subsubsection{Difficulty Levels For Dataset Division}
 KITTI set three levels for 3D object detection based on three factors: the size of the 2D bounding boxes, degree of occlusion and truncation. In order to compare the influence brought by these three factors, we extend the division into nine levels, as shown in Table \ref{levels_d}. And Level 4 is used to evaluate other design choices because it is neither too complicate nor too simple.
+\tbd [more detailed level to check the difficulty of each property]
 
 \renewcommand{\arraystretch}{1.0}
 \begin{table}[H]
@@ -64,7 +67,7 @@ We train the network for these nine levels to their best with the identical foun
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			& \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc. < 1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+			& \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc. < 1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 			Level 1 & \textbf{33.54} & 65.97 & \textbf{99.77} & 99.63 & \textbf{99.78} & \textbf{98.03} \\ \hline
 			Level 2 & 34.00 & \textbf{67.77} & 99.76 & 99.76 & 99.32 & 97.77 \\ \hline
 			Level 3 & 32.49 & 66.81 & 98.96 & \textbf{99.79} & 98.91 & 95.50 \\ \hline
@@ -94,7 +97,7 @@ We experiment with these loss functions with the same setup on Level 4 and evalu
 	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
-		Loss function & \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part \\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+		Loss function & \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part \\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 		\begin{tabular}[c]{@{}c@{}}Charbonnier loss\\ $\epsilon$=0.01\end{tabular} & 28.94 & 58.57 & 98.30 & 99.59 & 98.09 & 93.95 \\ \hline
 		\begin{tabular}[c]{@{}c@{}}Charbonnier loss\\ $\epsilon$=0.0001\end{tabular} & 27.3 & 59.04 & 97.89 & \textbf{99.73} & 97.7 & 92.27 \\ \hline
 		\begin{tabular}[c]{@{}c@{}}Huber loss\\ $\delta$=0.5\end{tabular} & 25.87 & 58.77 & 98.42 & 99.59 & 98.06 & 94.54 \\ \hline
@@ -120,7 +123,7 @@ We apply grid search to find the optimal loss weight combination which results i
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			($\lambda_{coord}$, $\lambda_{temp}$) & \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+			($\lambda_{coord}$, $\lambda_{temp}$) & \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 			(1, 1) & 29.35 & 63.89 & 98.53 & 99.66 & 98.39 & 94.98 \\ \hline
 			(1, 3) & 25.19 & 56.93 & 97.87 & 99.59 & 97.7 & 94.18 \\ \hline
 			(1, 10) & 24.71 & 53.65 & 98.05 & 99.66 & 97.61 & 94.41 \\ \hline
@@ -166,7 +169,7 @@ Weight decay is a regularization technique which is used to prevent the weights 
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			\begin{tabular}[c]{@{}c@{}}(learning rate, \\weight decay)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+			\begin{tabular}[c]{@{}c@{}}(learning rate, \\weight decay)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 			$(10^{-4}, 10^{-4})$ & 0.491 & 0.564 & 0.977 & \textbf{0.997} & 0.981 & 0.948 \\ \hline
 			$(10^{-4}, 10^{-5})$ & 0.54 & 0.608 & 0.98 & 0.996 & 0.983 & \textbf{0.951} \\ \hline
 			$(10^{-4}, 10^{-6})$ & 0.499 & 0.566 & 0.978 & \textbf{0.997} & 0.984 & \textbf{0.951} \\ \hline
@@ -188,6 +191,8 @@ Our baseline network uses ResNet50 as feature extractor. But there are several o
 
 As before, we train all the models with different base nets on the same setup with data Level 4. Their performance on six tasks are shown in Table \ref{basenets}. According to their performance, only VGG19 can perform better than ResNet50 on the whole. Therefore, we includes VGG19 for our final evaluation in Section \ref{exp_res}.
 
+\tbd [is it necessary to analyse why they perform this way]
+
 \begin{table}[H]
 	\centering
 	\caption{Performance of six tasks with different base net.}
@@ -195,7 +200,7 @@ As before, we train all the models with different base nets on the same setup wi
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			Base Net & \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+			Base Net & \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.<1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 			ResNet50 & \textbf{30.85} & \textbf{64.98} & \textbf{99.03} & 99.73 & \textbf{98.77} & 94.74 \\ \hline
 			VGG16 & 29.22 & 57.82 & 98.54 & \textbf{99.86} & 98.44 & \textbf{95.76} \\ \hline
 			VGG19 & \textbf{31.54} & 64.23 & \textbf{99.22} & \textbf{99.93} & \textbf{98.68} & \textbf{96.05} \\ \hline
@@ -208,7 +213,7 @@ As before, we train all the models with different base nets on the same setup wi
 	}
 \end{table}
 
-\subsection{Selection of Characteristic Points}
+\subsubsection{Selection of Characteristic Points}
 
 The number of characteristic points is another factor that influences the performance. Theoretically, the more points the better accuracy of 2D-3D matching because it is more robust to outliers. The outliers are eliminated via RANSAC \cite{Fischler:1981:RSC:358669.358692}. But the labelling of these points is time-consuming and demanding. Moreover, the exact locations of points also affect the performance, too. Some points may be hard to detect correctly with the network due to their context in the image and some even distribute differently among various shapes of vehicles. 
 
@@ -223,7 +228,9 @@ As the Figure \ref{figure:point_notation_22} shows, we initially label 22 points
 
 Therefore we do some experiment on the selection of these points. We select three cases: 1). 16 points: points 3-18; 2). 20 points: points 1-18 and points 21-22; 3). 22 points: point 1-22. We train these three case on data Level 2, 6, and 8 which corresponds to the easy, moderate, and hard defined by KITTI. The reason for training on three levels instead of only Level 4 as before is that the size of the 2D bounding box and degree of the occlusion and truncation impact the geometric appearance of vehicles in images and thus affect detection of these points.
 
-The experiment results are shown in Table \ref{point_selection}.  According to the results, 22-point case works best when the input patch is relatively bigger, \ie the minimal height for a 2D bounding box is 40 pixels. This is because when the vehicles are large in image, it is easier to estimate the 2D coordinates and the template proximity and in this scenario, the more the points, the better the performance. However, when very small vehicles are taken into consideration, it become harder to predict the 2D coordinates correctly because these key points in a small vehicle locate very close to each other. \tbd it requires more results to render the reasons.
+The experiment results are shown in Table \ref{point_selection}.  According to the results, 22-point case works best when the input patch is relatively bigger, \ie the minimal height for a 2D bounding box is 40 pixels. This is because when the vehicles are large in image, it is easier to estimate the 2D coordinates and the template proximity and in this scenario, the more the points, the better the performance. However, when very small vehicles are taken into consideration, it become harder to predict the 2D coordinates correctly because these key points in a small vehicle locate very close to each other. 
+
+\tbd [it requires more results to render the reasons. therefore i train them in 9 levels and then to evaluate the res.]
 
 
 
@@ -236,7 +243,7 @@ The experiment results are shown in Table \ref{point_selection}.  According to t
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			& \begin{tabular}[c]{@{}c@{}}3D vehicle\\ detection\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.< 1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
+			& \begin{tabular}[c]{@{}c@{}}3D bounding\\ box estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D localization\\ ($Loc.< 1m$)\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D orientation\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}3D dimension\\ estimation\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ localization\end{tabular} & \begin{tabular}[c]{@{}c@{}}2D part\\ visibility\end{tabular} \\ \hline
 			Easy\_P16 & 31.28 & 64.81 & 99.75 & \textbf{99.88} & \textbf{99.48} & \textbf{97.82} \\ \hline
 			Easy\_P20 & 34.00 & 67.77 & \textbf{99.76} & 99.76 & 99.32 & 97.77 \\ \hline
 			Easy\_P22 & \textbf{34.83} & \textbf{69.43} & 99.16 & 99.76 & 99.35 & 97.73 \\ \hline

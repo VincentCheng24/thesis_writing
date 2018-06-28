@@ -1,8 +1,7 @@
-In this section, we describe the experiment setup, discuss the most crucial design choices for our approach, evaluate our approach and its variations , and compare our approach with the start-of-the-art methods on monocular 3D pose estimation of vehicles.  
-
-template \tbd Experiments are divided into three parts1. First we compare with state-of-the-art methods for 3D object detection on KITTI [10] and SUN-RGBD [33] (Sec 5.1). Second, we provide in-depth analysis to validate our design choices (Sec 5.2). Last, we show qualitative results and discuss the strengths and limitations of our methods (Sec 5.3).
+In this section, we first describe the experiment setup and evaluation metrics in Section \ref{setup} and \ref{eval_met}. Second we discuss the most crucial design choices for our approach in Section \ref{d_choices}. Finally, we evaluate our approach and its variations , and compare our approach with the start-of-the-art methods on monocular 3D pose estimation of vehicles in Section \ref{exp_res}.
 
 \subsection{Experiment Setup}
+\label{setup}
 
 We have presented the approach in Section \ref{network} and \ref{inference} which is served as a baseline model of our approach. Some other design choices are made based on it. The benchmark network use ResNet50 \cite{DBLP:journals/corr/HeZRS15} as feature extractor, initialized with pre-trained weights trained on ImageNet \cite{DBLP:Russakovsky14}, and is trained with Adam \cite{DBLP:journals/corr/KingmaB14}. The network is implemented on Keras \cite{chollet2015keras} using TensorFlow \cite{tensorflow2015-whitepaper} as backend. Keras supports running both on GPU and CPU. 
 

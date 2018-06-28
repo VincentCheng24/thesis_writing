@@ -52,6 +52,7 @@ In our approach, there are two situations where template matching is performed t
 
 For both cases, the most fundamental drawback is that we can only match the target vehicle with an approximate model based on the Dims strategy. This would results in errors in 2D and 3D coordinates of key points and thus impacts the final 3D vehicle pose estimation.
 
+\tbd [distribution of dims of models and kitti. labelled 23 new models but maybe no time to retain them.]
 \subsubsection{Possible Improvements}
 As we mentioned before, the geometric property of 3D sketch relies heavily on the type of the vehicles. Therefore, a possible improvement for matching is to introduce type information into the matching phase. And there are some out-off-shelf frameworks can provide this kind of information \cite{DBLP:journals/corr/YangLLT15, 7780697, 7410527, DBLP:journals/corr/DehghanMSO17}, \ie Afshin \etal provide a network can recognize the Make and Model of vehicles \cite{DBLP:journals/corr/DehghanMSO17}. 
 
@@ -78,7 +79,8 @@ Moreover, our approach requires an additional 3D vehicle model dataset to encode
 
 According to the competition results of KITTI 3D object detection, the approach that relies on single sensor can't compare with those making use of multi-sensor data \cite{3dobject}. RGB images captured by cameras have high resolution and good texture knowledge but lack depth information, which cloud points collected by LiDAR have 3D information of the scene but the resolution is relative lower and lack texture information. Therefore we think the best performance would be achieved by some approach driven by sensor fusion. If we have can start this task again, this is the first direction we will explore.
 
+\tbd [is it necessary to analyse why out approach can't achieve very high accuracy, \ie analyse the wrong examples]
 
-
+\tbd [is it necessary to point out the advantages of our approach]
 
 

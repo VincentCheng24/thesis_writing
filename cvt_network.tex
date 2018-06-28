@@ -22,7 +22,7 @@ a_{ij} = \sigma(W_{ij}^T X_i +b_j)
 
 where $a_{ij}$ is the result of the $i_th$ neuron in the $j_th$ layer, $\sigma$ is the activation function and $W_ij$ and $b_j$ are the weights vector and bias applied to input vector $X_i$.  The pooling layer is a special case which performs downsampling operations, such as max pooling \cite{Boureau:2010} and average pooling \cite{6460871}.
 
-As shown in Figure \ref{figure:nn_archi}, our network follows the standard CNN architecture established in LeNet-5 \cite{726791}. It stacks a set of convolutional layers and pooling layers as a feature extractor, \tbd one fully-connected layers followed, and three output layers in the end. The goal of this network is to learn the 2D coordinates and visibility property of 20 interest points and the template proximity of the vehicle, given the RGB images captured by a monocular camera.
+As shown in Figure \ref{figure:nn_archi}, our network follows the standard CNN architecture established in LeNet-5 \cite{726791}. It stacks a set of convolutional layers and pooling layers as a feature extractor, \tbd followed by 3 residual blocks and one fully-connected layers to refine the features, and three kinds of output layers in the end. The goal of this network is to learn the 2D coordinates and visibility property of 20 interest points and the template proximity of the vehicle, given the RGB images captured by a monocular camera.
 
 \paragraph{Input Layer}
 The input layer accepts the input RGB images and feeds them into the network. In theory, images with arbitrary size can be accepted, but to make it more efficient, we use images with fixed resolution (96 x 160).  In this way, multiple images can be processed in one batch in order to reduce the variance of parameter updates and make the best use of highly optimized matrix optimizations during training \cite{DBLP:journals/corr/Ruder16}.
@@ -84,6 +84,7 @@ As mentioned in Section \ref{output}, our network has totally 22 output layers. 
 \paragraph{Loss Functions}
 \label{loss_functions}
 The learning of 2D coordinates and template proximity are regression tasks so that a robust smooth $L_1$ loss function \cite{DBLP:journals/corr/Girshick15} is chosen for them. We modify it as
+
 \begin{equation}
 \label{eq10}
 smooth_{L_1}(x) =

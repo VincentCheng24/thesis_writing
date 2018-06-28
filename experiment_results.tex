@@ -2,13 +2,14 @@
 \label{exp_res}
 In this subsection, we present the best results of six tasks achieved by our approach and compare them with the state-of-the-art works in monocular 3D vehicle detection.
 
-\subsubsection{3D Vehicle Detection}
+\subsubsection{3D Bounding Box Estimation} 
 3D vehicle detection refers to the 3D bounding box estimation of the target vehicles in images. A 3D bounding box is estimated correctly, if $IoU>0.7$. Our approach is based on 2D object detection, so in order to be comparable with other methods, we eliminate the influence of this foundation by multiplying our results with the top accuracy of 2D car detection in KITTI achieved by iDST-VC \cite{2dobject}. Our results and the comparison are shown in Table \ref{3D_vehicle_detection}. A LiDAR-based method, VoxelNet++ \cite{DBLP:journals/corr/abs-1711-06396}, achieves the best performance currently. Based on the assumption above, our method currently ranks at the middle ($24^{th}$) on 3D vehicle detection benchmark \cite{3dobject}. It can achieve similar performance as VoxelNet basic \cite{DBLP:journals/corr/abs-1711-06396}. It outperforms all traceable image-based methods and some of LiDAR-based methods. For more comparison, check \cite{3dobject}. Besides, our method performs 3D detection for all cars and vans on KITTI dataset while the results from other methods are for cars only. Therefore, theoretically, the performance of our approach on cars is at least not worse than on both cars and vans. 
 
+\tbd [evaluation, mine x 2D acc.  because hard to get the numerical data from graph with lowest recall]
 
 \begin{table}[H]
 	\centering
-	\caption{Comparison of the 3D Vehicle Detection accuracy on official KITTI dataset for cars (ours is for cars and vans)}
+	\caption{Comparison of the 3D bounding box estimation on official KITTI dataset for cars (ours is for cars and vans)}
 	\label{3D_vehicle_detection}
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
@@ -28,6 +29,9 @@ In this subsection, we present the best results of six tasks achieved by our app
 
 \subsubsection{3D Localization}
 3D localization refers to the estimation of the location of the vehicle's center. We follow the evaluation metric used by \cite{DBLP:journals/corr/MousavianAFK16, DBLP:journals/corr/ChabotCRTC17} that a 3D localization is correct if the distance between the true and predicted center is smaller than a threshold and 1 meter and 2 meters are used as thresholds. And we borrow the idea from \cite{DBLP:journals/corr/MousavianAFK16} to calculate the 3D Localization accuracy,which is the ratio between Average Localization Precision (ALP) and Average Precision (AP), for other methods. We present our results and the comparison in Table \ref{3d_local}. Clearly, our method outperforms all other monocular methods, while can't match the perform of stereo 3DOP \cite{Chen:2015:OPA:2969239.2969287}.
+
+\tbd [3DL = ALP / AP]
+\tbd [3DOP is very high, include it ?]
 
 \begin{table}[H]
 	\centering
@@ -51,6 +55,8 @@ In this subsection, we present the best results of six tasks achieved by our app
 
 \subsubsection{3D Orientation Estimation}
 3D Orientation Estimation refers to the estimation of rotation of vehicle along the Y-axis (yaw axis), $r_y$, in the camera coordinate systems. The evaluation metric is Orientation Score (OS), which is the ratio between Average Orientation Estimation (AOS) and Average Precision (AP) \cite{DBLP:journals/corr/MousavianAFK16}. Table \ref{os_cmp} shows the results of our methods and other state-of-the-art ones. Although our method can't achieve the better performance than , the performance than SubCNN \cite{DBLP:journals/corr/XiangCLS16},  Deep3DBox \cite{DBLP:journals/corr/MousavianAFK16}, and DeepMANTA \cite{DBLP:journals/corr/ChabotCRTC17} it performs better than 3DOP \cite{Chen:2015:OPA:2969239.2969287} and Mono3D \cite{cvpr16chen}.  Therefore, our method achieves the start-of-the-art level performance for 3D orientation estimation. Besides, our approach consider both cars and vans from KITTI dataset, while the others are only evaluated on cars.
+
+\tbd [OS = AOS / AP]
 
 \begin{table}[H]
 	\centering
@@ -89,3 +95,6 @@ Our approach is developed based on DeepMANTA \cite{DBLP:journals/corr/ChabotCRTC
 		\end{tabular}
 	}
 \end{table}
+
+\tbd [the methods used to compare on different tasks are inconsistent]
+\tbd [better to show some images here to show the performance]

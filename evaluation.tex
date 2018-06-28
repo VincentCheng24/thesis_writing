@@ -1,4 +1,5 @@
 \subsection{Evaluation Metrics}
+\label{eval_met}
 
 We use intersection over union (IoU) to measure the performance of 3D vehicle detection. IoU used to measure the similarity of two 2D bounding boxes in various 2D object detection challenges, \eg Pascal VOC \cite{Everingham15} and ILSVRC \cite{DBLP:Russakovsky14}. Recently it is extended to measure 3D object detection with the formula:
 \begin{equation}
@@ -18,7 +19,7 @@ where $N$ denotes the number of examples in the validation set and $\triangle \t
 \end{equation}
 where $(h_{gt}, w_{gt}, l_{gt})$ is the ground truth. 2D part visibility prediction is a pure classification problem so that the measure is the accuracy over 4 classes.
 
-Mean distance error (MDE) \tbd research it to check whether it's necessary to use this
+%Mean distance error (MDE) \tbd research it to check whether it's necessary to use this
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[ht]

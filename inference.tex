@@ -36,6 +36,8 @@ Based on the projection mechanism described in section \ref{projection}, the 2D 
 	0_{1\times 3}& 1
 	\end{pmatrix} C_m^{3d}
 \end{equation}
+
+\tbd [add the optimization equation for 2D-3D matching here]
 where $K_{3\times 4}$ is the given camera calibration matrix, $R_{3\times 3}$ and $t_{3\times 1}$ are the rotation and translation to be computed. It is easy to compute the rotation and translation of the target vehicle in the camera coordinate system with the standard 2D-3D matching algorithm, EPnP \cite{Lepetit2008}. The KITTI data simplifies the rotation to one dimension, $r_y$, so that we follow this convention. Translation is the 3D coordinate of the origin of the vehicle so that it can represent the location of the vehicle in camera coordinate system.
 
 
