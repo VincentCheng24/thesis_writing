@@ -137,18 +137,18 @@ A pair of stereo RGB images can provide the depth information of the current sce
 
 A LiDAR point cloud is a collection of 3D points acquired by a LiDAR laser scanner. It can represent 3D information of the surroundings but its resolution is lower than that of images.
 
-One set of approaches utilize a point cloud by converting it into a 2D array and making use of the image-based methods to perform 3D detection tasks. This can alleviate the inherent problem that the LiDAR point is often sparse and irregular in 3D voxel representation. VeloFCN \cite{DBLP:journals/corr/LiZX16} projects the point cloud to the front view to generate a 2D point map and then applies a fully convolutional neural network to estimate the 3D bounding boxes for vehicles on this 2D point map. \cite{DBLP:journals/corr/abs-1710-07368, Chen:2015:OPA:2969239.2969287} also fall into this category. Besides, the pre-trained models based on RGB images can be used to initialize the CNNs, which has been proven to be beneficial \cite{DBLP:journals/corr/GuptaGAM14}. However, the 2D representation of LiDAR cloud points suffer from object size variations because of its distance to the sensor and object overlapping.
+One set of approaches utilize a point cloud by converting it into a 2D array and making use of the image-based methods to perform 3D detection tasks. This can alleviate the inherent problem that the LiDAR point is often sparse and irregular in 3D voxel representation. VeloFCN \cite{DBLP:journals/corr/LiZX16} projects the point cloud to the front view to generate a 2D point map and then applies a fully convolutional neural network to estimate the 3D bounding boxes for vehicles on this 2D point map. \cite{DBLP:journals/corr/abs-1710-07368, Chen:2015:OPA:2969239.2969287} also fall into this category. Besides, the pre-trained models based on RGB images can be used to initialize the CNNs, which has been proven to be beneficial \cite{DBLP:journals/corr/GuptaGAM14}. However, the 2D representation of LiDAR cloud points suffers from object size variations because of its distance to the sensor and object overlapping.
 
-Another category of approaches transforms the cloud point into a 3D voxel grid representation. Various quantities are used to encode voxels \cite{10.1007/978-3-319-10599-4_41, 7780463, DBLP:journals/corr/Li16p, Wang-RSS-15, DBLP:journals/corr/EngelckeRWTP16}. For example, in \cite{Wang-RSS-15, DBLP:journals/corr/EngelckeRWTP16}, the information in one non-empty cell is encoded with six quantities while empty cells contain no information. For the single-stage detectors, \eg Sliding Shapes \cite{10.1007/978-3-319-10599-4_41} and Vote3D \cite{Wang-RSS-15}, they slide window across the 3D voxel space and apply SVM classifiers to perform 3D detection. To improve the performance, Vote3Deep \cite{DBLP:journals/corr/EngelckeRWTP16} uses a voting strategy with a sparse 3D convolutional network. And \cite{DBLP:journals/corr/Li16p} feeds the point cloud voxel directly to a 3D FCN to generate 3D bounding boxes. For the two-stage framework, \eg Voxelnet, it extends the 2D RPN \cite{DBLP:journals/corr/RenHG015} to 3D to generate 3D proposals and  applies a refine network to score these proposals \cite{DBLP:journals/corr/abs-1711-06396}. 3D CNNs boosts the 3D detection performance while the computation is very expensive and sparsity remains a challenge.  
+Another category of approaches transforms the cloud point into a 3D voxel grid representation. Various quantities are used to encode voxels \cite{10.1007/978-3-319-10599-4_41, 7780463, DBLP:journals/corr/Li16p, Wang-RSS-15, DBLP:journals/corr/EngelckeRWTP16}. For example, in \cite{Wang-RSS-15, DBLP:journals/corr/EngelckeRWTP16}, the information in one non-empty cell is encoded with six quantities while empty cells contain no information. For the single-stage detectors, \eg Sliding Shapes \cite{10.1007/978-3-319-10599-4_41} and Vote3D \cite{Wang-RSS-15}, they slide window across the 3D voxel space and apply SVM classifiers to perform 3D detection. To improve the performance, Vote3Deep \cite{DBLP:journals/corr/EngelckeRWTP16} uses a voting strategy with a sparse 3D convolutional network. And \cite{DBLP:journals/corr/Li16p} feeds the point cloud voxel directly to a 3D fully convolutional neural network to generate 3D bounding boxes. For the two-stage framework, \eg Voxelnet, it extends the 2D RPN \cite{DBLP:journals/corr/RenHG015} to 3D to generate 3D proposals and  applies a refine network to score these proposals \cite{DBLP:journals/corr/abs-1711-06396}. 3D CNNs boosts the 3D detection performance while the computation is very expensive and sparsity remains a challenge.  
 
 
 \subsection{Sensor Fusion Based Approaches}
 
-Images are of high resolution but lack depth, while LiDAR data has 3D information but are sparse and irregular. Thus, many works have investigated combining these complementary data sources together to build robust 3D object detectors. 
+Images are of high resolution but lack depth, while LiDAR data has 3D information but are sparse and irregular. Thus, many works have investigated combining these two complementary data sources together to build robust 3D object detectors. 
 
 One investigated direction is to extract information from these two sources separately for sub-functions. Frustum PointNets \cite{DBLP:journals/corr/abs-1711-08488} first generates frustum point cloud proposals based on 2D object detection, then performs 3D instance segmentation in each frustum point cloud and finally applies a box estimation net to estimate the final 3D bounding box for each object. Similarly, \cite{DBLP:journals/corr/abs-1803-00387} first generates 2D bounding boxes and estimate vehicle dimensions for the target vehicles in images. Secondly, a model fitting algorithm estimates the 3D bounding box on a subset of the point clouds which fall into the 2D bounding box after projection. Finally, a refine 2D CNN performs the final 3D box regression and classification.
 
-The other is to fuse these two kinds of data and process them as a whole. There are various ways to fuse data. One intuitive way is projection. For example, \cite{DBLP:journals/corr/EitelSSRB15} converts the point cloud to a dense depth image and then appends it as an additional channel of the image. \cite{7487370} extends \cite{DBLP:journals/corr/EitelSSRB15} via converting the cloud point to a three-channel HHA map. Their 3D detection score is low mostly due to the loss of 3D information during projection. The more advanced way is to fuse their feature maps. MV3D \cite{DBLP:journals/corr/ChenMWLX16} first generates 3D proposals in LiDAR's bird's-eye view and projects these proposals to the features maps of the image and the bird’s eye view and front view of LIDAR data. Then a deep network fuses three RoI pooling regions and performs 3D detection based on the fused features. PointFusion\cite{DBLP:journals/corr/abs-1711-10871}simultaneously applies a ResNet \cite{DBLP:journals/corr/HeZRS15} to extract appearance and geometry features from image crops defined by the 2D bounding boxes and a modified PointNet \cite{DBLP:journals/corr/QiSMG16} to process the raw point cloud, and finally uses a novel fusion network to integrate both features and estimate 3D bounding box. Recently, Zining \etal \cite{DBLP:journals/corr/abs-1711-06703} apply an innovative sparse non-homogeneous pooling layer to fuse the features extracted from bird’s eye view of LiDAR data and front view camera images by two separate CNNs before region proposal stage. And then a single-stage detector adapted from \cite{DBLP:journals/corr/abs-1708-02002} is designed to perform 3D detection on these fused data without RoI pooling, which is 6 times faster then MV3D. AVOD \cite{DBLP:journals/corr/abs-1712-02294} applies double feature fusions.  It uses two identical CNN to extract features from images and LiDAR data respectively and exploits a Multimodal Fusion Region Proposal Network to generate vehicle proposals from the fused feature crops, projection regions of anchors in the feature maps. Finally, it applies a Multiview Detection Network to perform 3D detection on the fused feature crops corresponding to the proposals. %It achieves the best performance on KITTI 3D vehicle detection up to now.
+The other is to fuse these two kinds of data and process them as a whole. There are various ways to fuse data. One intuitive way is projection. For example, \cite{DBLP:journals/corr/EitelSSRB15} converts the point cloud to a dense depth map and then appends the map as an additional channel to the image. \cite{7487370} extends \cite{DBLP:journals/corr/EitelSSRB15} via converting the cloud point to a three-channel HHA (horizontal disparity, height above ground, and angle) map. Their 3D detection score is relatively low mostly due to the loss of 3D information during projection. The more advanced way is to fuse their feature maps. MV3D \cite{DBLP:journals/corr/ChenMWLX16} first generates 3D proposals in LiDAR bird's-eye view and projects these proposals to the features maps of the image and the bird’s eye view and front view of LIDAR data. Then a deep network fuses three RoI pooling regions and performs 3D detection based on the fused features. PointFusion \cite{DBLP:journals/corr/abs-1711-10871} simultaneously applies a ResNet \cite{DBLP:journals/corr/HeZRS15} to extract appearance and geometry features from image crops defined by the 2D bounding boxes and a modified PointNet \cite{DBLP:journals/corr/QiSMG16} to process the raw point cloud, and finally uses a novel fusion network to integrate both features and estimate 3D bounding box. Recently, Zining \etal \cite{DBLP:journals/corr/abs-1711-06703} apply an innovative sparse non-homogeneous pooling layer to fuse the features extracted from bird’s eye view of LiDAR data and front view camera images by two separate CNNs before region proposal stage. And then a single-stage detector adapted from \cite{DBLP:journals/corr/abs-1708-02002} is designed to perform 3D detection on these fused data without RoI pooling, which is 6 times faster then MV3D. AVOD \cite{DBLP:journals/corr/abs-1712-02294} applies feature fusion twice at the proposal generation and final detection phase respectively.  It uses two identical CNN to extract features from images and LiDAR data respectively and exploits a Multimodal Fusion Region Proposal Network to generate vehicle proposals from the fused feature crops, projection regions of anchors in the feature maps. Finally, it applies a Multiview Detection Network to perform 3D detection on the fused feature crops corresponding to the proposals. %It achieves the best performance on KITTI 3D vehicle detection up to now.
 
 
 
@@ -176,24 +176,24 @@ But the truly autonomous cars did not show up until the 1980s, even though they 
 
 In the 1990s, huge progress was made. The VaMP from Daimler-Benz drove more than 1000 km, achieving the maximum speed of 130 km/h on a normal Pairs highway semi-autonomously \cite{schj}. The Navlab project in Carnegie Mellon University achieved a 5000-km journey across America with only 1.8\% human interventions \cite{nohand}. The ParkShuttle in the Netherlands could autonomously navigate itself on a dedicated lane as an automated people mover \cite{parkshuttle}.In this decade, the experiments were mainly carried out in highway scenarios rather than urban scenes.
 
-In the 2000s, competitions promoted this technology a lot. One of the most famous competitions is The DARPA Grand Challenge in the U.S. who offered \$ 1 million for the first prize. In 2004, no vehicle completed the 241-km journey autonomously while 5 teams achieved this goal in 2005 \cite{Buehler2007}. And in Grand Challenge III 2007, known as Urban Challenge, 6 vehicles  finished the event which was a 96-km urban route involving traffic regulations and other vehicles \cite{Buehler2009}.
+In the 2000s, competitions promoted this technology greatly. One of the most famous competitions is The DARPA Grand Challenge in the U.S. who offered \$ 1 million for the first prize. In 2004, no vehicle completed the 241-km journey autonomously while 5 teams achieved this goal in 2005 \cite{Buehler2007}. And in Grand Challenge III 2007, known as Urban Challenge, 6 vehicles  finished the event which was a 96-km urban route involving traffic regulations and other vehicles \cite{Buehler2009}.
 
-In the 2010s,  Autonomous Driving Technology starts to take off. Numerous events and projects have been carried out and considerable companies, universities, and research centers have engaged in this field. Based on the progress made before, many autonomous vehicle systems are being tested or even brought into production.  Notable events includes the VisLab Intercontinental Autonomous Challenge in 2010 \cite{doi:10.1504/IJVAS.2012.051250} and the Intelligent Vehicle Future  Challenges from 2009 to 2013 \cite{newlet00}. In industry, Tesla Motor released AutoPilot  that is able to perform automated parking and lane control with autonomous driving, braking and speed adjustment in 2014, and  Audi started the first production car, A8,  reaching Level 3 of Automation in 2017 \cite{historyad}.
+In the 2010s,  Autonomous Driving Technology starts to take off. Numerous events and projects have been carried out and considerable companies, universities, and research centres have engaged in this field. Based on the progress made previously, many autonomous vehicle systems are being tested or even brought into production.  Notable events includes the VisLab Intercontinental Autonomous Challenge in 2010 \cite{doi:10.1504/IJVAS.2012.051250} and the Intelligent Vehicle Future Challenges from 2009 to 2013 \cite{newlet00}. In industry, Tesla Motor released AutoPilot  that is able to perform automated parking and lane control with autonomous driving, braking and speed adjustment in 2014, and  Audi started the first production car, A8,  reaching Level 3 of Automation in 2017 \cite{historyad}.
 
-Based on the efforts in the last decades, Autonomous Driving is gradually transformed from dream to reality. Its bonus covers safety guarantee, congestion reduction, land use efficiency, energy saving, emission reduction, economic benefits and so on. However, the Level 5 vehicles are so far from maturity that further research and development are in high demand.
+Based on the efforts in the last decades, Autonomous Driving is gradually transformed from dream to reality. Its bonus covers safety guarantee, congestion reduction, land use efficiency, energy saving, emission reduction, economic benefits and so on. However, the Level 5 vehicles are still so far from maturity that further research and development are in high demand.
 
 \clearpage
 
 \subsection{Deep Learning Technology}
 \label{dlt}
 
-Recently, Deep Learning (DL) has shown its impressive power in a variety of tasks, especially in some complex tasks that cannot be explicitly programmed by hand, such as anomaly detection and online advertising. DL delivers the solutions by learning from data automatically via a general learning procedure which dominantly makes use of backpropagation and optimization algorithms, \eg gradient descent.
+Recently, Deep Learning (DL) has shown its impressive power in a variety of tasks, especially in some complex tasks that cannot be explicitly programmed by hand, such as anomaly detection and online advertising. DL delivers the solutions by learning from data automatically via a general learning procedure which mainly makes use of backpropagation and optimization algorithms, \eg gradient descent.
 
-It attracts world-wide attention mainly by outperforming other classic machine learning algorithms, \eg Support Vector Machine (SVM),  in many competitions in image classification, object detection, or natural language processing. This is because DL applies a deep automatic feature learning architecture, \ie an artificial neural network model with multiple hidden layers, to learn deep distributed hierarchical non-linear representations which yield better performance for learning tasks, \eg in terms of classification accuracy. Such representations bring many good properties, such as feature reuse, parameter sharing,  multiple levels of progressive abstraction, and invariance to local changes of the raw inputs, and thus provide better predictive power than classic machine learning algorithms \cite{6472238}.
+It attracts the world-wide attention mostly by outperforming other classic machine learning algorithms, \eg Support Vector Machine (SVM),  in many competitions in image classification, object detection, or natural language processing. This is because DL applies a deep automatic feature learning architecture, \ie an artificial neural network model with multiple hidden layers, to learn deep distributed hierarchical non-linear representations which yield better performance for learning tasks, \eg in terms of classification accuracy. Such representations bring many good properties, such as feature reuse, parameter sharing,  multiple levels of progressive abstraction, and invariance to local changes of the raw inputs  \cite{6472238}. And thus, DL provides better predictive power than classic machine learning algorithms.
 
-Convolutional neural networks (CNNs) is one of the major branches of artificial neural networks. A CNN is a feed-forward multi-layer neural network, typically consisting of one or more convolutional layers,  interleaved by some pooling layers, and finally followed by some fully-connected layers. This modern framework of CNNs is established by LeCun \etal when he proposed the handwritten digit classifier LeNet-5 \cite{726791}. Afterwards, deeper architectures are emerged such as AlexNet \cite{DBLP:Russakovsky14}, VGGNet \cite{DBLP:SimonyanZ14a}, GoogleNet \cite{DBLP:SzegedyLJSRAEVR14} and ResNet \cite{DBLP:HeZRS15}. In general, deeper architectures generate better feature representations and closer approximations to the target function but they also result in more complex models which are more difficult to train and easier to be overfitting. Therefore, many approaches have been proposed to address such problems.
+Convolutional neural networks (CNNs) is one of the major branches of artificial neural networks. A CNN is a feed-forward multi-layer neural network, typically consisting of one or more convolutional layers,  interleaved by some pooling layers, and finally followed by some fully-connected layers. This modern framework of CNNs is established by LeCun \etal when he proposed the handwritten digit classifier LeNet-5 \cite{726791}. Afterwards, deeper architectures are emerged,  such as AlexNet \cite{DBLP:Russakovsky14}, VGGNet \cite{DBLP:SimonyanZ14a}, GoogleNet \cite{DBLP:SzegedyLJSRAEVR14} and ResNet \cite{DBLP:HeZRS15}. In general, compared to shallow architectures, deeper architectures generate better feature representations and closer approximations to the target function but they also result in more complex models which are more difficult to train and easier to be overfitting. Therefore, many approaches have been proposed to address such problems in order to boost the capacity of CNNs most.
 
-CNNs are specifically designed to work with problems taking images as inputs, such as image classification, object detection and pose estimation. The above-mentioned CNNs examples all made the great performance in their respective tasks, \eg ResNet won the first prize in ILSVRC 2015.
+CNNs are specifically designed to work with problems taking images as inputs, such as image classification, object detection and pose estimation. The above-mentioned CNNs examples all made great performance in their respective tasks, \eg ResNet won the first prize in ILSVRC 2015.
 
 The core building block, convolutional layers, is used to compute feature maps with convolution kernels. Each neuron in a convolutional layer is connected to a local region in the previous layer, called receptive field, and computes an output by performing a convolution operation (element-wise matrix multiplication) between its weights (kernel) and the connected region followed by a non-linear activation function. A nice property of CNNs is that the kernel  is shared by all receptive fields in the preceding layer when computing the corresponding feature map. Thus, each feature map is used to capture exactly the same feature at different locations. And this characteristic can substantially reduce the number of parameters in CNNs, which leads to faster training \cite{nndd}.  
 
@@ -220,7 +220,7 @@ Next, in this section, we introduce some basic knowledge in computer vision rela
 
 Imaging systems or cameras are some devices that allow the projection of light from 3D points to a 2D medium that records the light pattern. Figure \ref{figure:camera} (a) shows a pinhole imaging model which is able to capture the light pattern, the inverted candle image, by allowing a very tiny cone of rays issued  at every point of the source, the real candle,  to project on the image plane. This is called pinhole perspective projection which is primitive but provides an acceptable approximation of the imaging process \cite{Forsyth:2002:CVM:580035}. 
 
-The projection equation can be derived from Figure \ref{figure:camera} (b), where $ (O, i, j, k) $ is the pinhole camera coordinate system and the origin $O$ is at the pinhole,  $p=(u, v, d)^T$ is a point in the image, and   $P=(x, y, z)^T$ is a point denotes the source. As light travels straight in the same medium, $p, O$ and $P$ are collinear, and Therefore, we can deduce the Eq. \ref{eq1}: 
+The projection equation can be derived from Figure \ref{figure:camera} (b), where $ (O, i, j, k) $ is the pinhole camera coordinate system and the origin $O$ is at the pinhole,  $p=(u, v, d)^T$ is a point in the image, and   $P=(x, y, z)^T$ is a point denotes the source. As light travels straight in the same medium, $p, O$ and $P$ are collinear. Therefore, we can deduce the Eq. \ref{eq1}: 
 
 \begin{equation}
 \label{eq1}
@@ -234,7 +234,7 @@ Modern cameras are built on lenses that can gather more light to make the image 
 
 \begin{figure}[h]		
 	\includegraphics[width=1\textwidth]{camera.png}
-	\caption[Pinhole camera model and perspective projection.]{(a). the pinhole imaging model; (b). the geometric model for perspective projection. \cite{Forsyth:2002:CVM:580035}}
+	\caption[The pinhole camera model and perspective projection.]{(a). the pinhole imaging model; (b). the geometric model for perspective projection \cite{Forsyth:2002:CVM:580035}.}
 	\centering
 	\label{figure:camera}
 \end{figure}
@@ -270,7 +270,7 @@ x\\  y\\  z
 \end{pmatrix}
 \end{equation}
 
-\textbf{Extrinsic parameters} define a rigid transformation from world coordinate system to camera frame. A rigid transformation has six degrees of freedom, including three Euler angles expressed in a $3\time3$ rotation matrix $R$ and three translation components along each axis expressed in a $1\times3$ translation vector $t$. A 3D point expressed in homogeneous coordinates is $P=(x, y, z, 1)^T$. Homogeneous coordinates can simplify various geometric transformations into matrix multiplication \cite{Forsyth:2002:CVM:580035}.  Therefore, this rigid transformation expressed in homogeneous coordinates is 
+\textbf{Extrinsic parameters} define a rigid transformation from world coordinate system to the camera coordinate system. A rigid transformation has six degrees of freedom, including three Euler angles expressed in a $3\time3$ rotation matrix $R$ and three translation components along each axis expressed in a $1\times3$ translation vector $t$. A 3D point expressed in homogeneous coordinates is $P=(x, y, z, 1)^T$. Homogeneous coordinates can simplify various geometric transformations into matrix multiplication \cite{Forsyth:2002:CVM:580035}.  Therefore, this rigid transformation expressed in homogeneous coordinates is 
 \begin{equation}
 \label{eq4}
 P^{C} = T_W^C P^W, where ~~T_W^C = 
@@ -293,6 +293,10 @@ R & t\\
 where $M$ is the \textbf{perspective projection matrix}.
 \clearpage
 
+
+
+
+
 \section{Deep3DP Approach}
 \label{main_work}
 \begin{figure}[h]		
@@ -302,17 +306,17 @@ where $M$ is the \textbf{perspective projection matrix}.
 	\label{figure:app_archi}
 \end{figure}
 
-In this section, we elaborate on our approach for 3D pose estimation of vehicles in monocular images. Our approach is based on 2D vehicle detection, \ie the 2D bounding boxes of vehicles are given as prior, since 2D object detection techniques, such as YOLO \cite{DBLP:journals/corr/RedmonF16}, Faster R-CNN \cite{DBLP:journals/corr/RenHG015}, SSD \cite{DBLP:journals/corr/LiuAESR15}, R-FCN \cite{DBLP:journals/corr/DaiLHS16}, and FPN \cite{DBLP:journals/corr/LinDGHHB16},  have achieved very high accuracy while 3D object detection performance is still primitive.  The overall architecture of the approach is illustrated in Figure \ref{figure:app_archi}. It consists of two main phases. The first one is the Deep3DP Network which takes the KITTI images and the 2D bounding boxes as inputs and predicts the visibility property and 2D coordinates of all characteristic points, as well as the dimension proximity. The details are presented in section \ref{network}.  The other phase estimates the 3D location, rotation, and dimension of each vehicle based on the 3D vehicle dataset and the outputs of the Deep3DP Network. Section \ref{inference} demonstrated this phase in detail. The KITTI dataset and the 3D vehicle dataset are described in section \ref{data}.
+In this section, we elaborate on our approach for 3D pose estimation of vehicles in monocular images. Our approach is based on 2D vehicle detection, \ie the 2D bounding boxes of vehicles are given as prior, since 2D object detection techniques, such as YOLO \cite{DBLP:journals/corr/RedmonF16}, Faster R-CNN \cite{DBLP:journals/corr/RenHG015}, SSD \cite{DBLP:journals/corr/LiuAESR15}, R-FCN \cite{DBLP:journals/corr/DaiLHS16}, and FPN \cite{DBLP:journals/corr/LinDGHHB16},  have achieved very high accuracy while 3D object detection performance is still primitive.  The overall architecture of the approach is illustrated in Figure \ref{figure:app_archi}. It consists of two main phases. The first one is the Deep3DP Network which takes the KITTI images and the 2D bounding boxes as inputs and predicts the visibility property and 2D coordinates of all characteristic points, as well as the dimension proximity. The details are presented in section \ref{network}.  The other phase estimates the 3D location, orientation, and dimensions of each vehicle based on the 3D vehicle dataset and the outputs of the Deep3DP Network. Section \ref{inference} demonstrates this phase in detail. The KITTI dataset and the 3D vehicle dataset are described in section \ref{data}.
 
 
 \subsection{Data and Labelling}
 \label{data}
 \subsubsection{KITTI Dataset}
-The KITTI 2D/3D object detection challenge is dedicated to autonomous driving and releases a dataset containing 7481 images for each one of 4 cameras and their associated labels and calibrations \cite{Geiger2012CVPR}. The dataset covers scenarios of City, Residential, Road, Campus, and Person. We only use the images taken by the left colour camera. The example image is shown in Figure \ref{figure:kitti_image}. The associated labels are shown in Table \ref{kitti_lable}. The calibration is given as transformation matrix.
+The KITTI 2D/3D object detection benchmark is dedicated to autonomous driving and releases a dataset containing 7481 images for each one of 4 cameras and their associated labels and calibration parameters \cite{Geiger2012CVPR}. The dataset covers scenarios of City, Residential, Road, Campus, and Person. We only use the images taken by the left colour camera. One example image is shown in Figure \ref{figure:kitti_image}. The associated labels are shown in Table \ref{kitti_lable}. The calibration is given as transformation matrix.
 
 \begin{figure}[H]		
 	\includegraphics[width=1\textwidth]{000010.png}
-	\caption[Example image from KITTI dataset.]{Example image from KITTI dataset captured by the left colour camera.}
+	\caption[One example image from KITTI dataset.]{One example image from KITTI dataset captured by the left colour camera.}
 	\centering
 	\label{figure:kitti_image}
 \end{figure}
@@ -330,8 +334,8 @@ The KITTI 2D/3D object detection challenge is dedicated to autonomous driving an
 			1        & truncated   & \begin{tabular}[c]{@{}l@{}}A float from 0 (non-truncated) to 1,\\ indicating the extent of the object out of the image\end{tabular}                                       \\ \hline
 			1        & occluded    & \begin{tabular}[c]{@{}l@{}}An integer indicating occlusion state: \\ 0 = fully visible, 1 = partly occluded, \\ 2 = largely occluded, 3 = unknown\end{tabular}             \\ \hline
 			1        & alpha       & Observation angle of the object, ranging {[}-pi..pi{]}                                                                                                                      \\ \hline
-			4        & bbox        & \begin{tabular}[c]{@{}l@{}}2D bounding box of the object in the image (0-based index): \\ contains left, top, right, bottom pixel coordinates ($x_1$, $y_1$, $x_2$, $y_2$)\end{tabular} \\ \hline
-			3        & dimensions  & 3D object dimensions: height, width, length (in meters)                                                                                                                 \\ \hline
+			4        & 2D bbox        & \begin{tabular}[c]{@{}l@{}}2D bounding box of the object in the image (0-based index): \\ contains left, top, right, bottom pixel coordinates ($x_1$, $y_1$, $x_2$, $y_2$)\end{tabular} \\ \hline
+			3        & 3D dimensions  & 3D object dimensions: height, width, length (in meters)                                                                                                                 \\ \hline
 			3        & location    & 3D object location x,y,z in camera coordinates (in meters)                                                                                                              \\ \hline
 			1        & rotation\_y & Rotation $r_y$ around Y-axis in camera coordinates {[}-pi..pi{]}                                                                                                           \\ \hline
 		\end{tabular}%
@@ -340,14 +344,10 @@ The KITTI 2D/3D object detection challenge is dedicated to autonomous driving an
 
 \subsubsection{3D Vehicle Dataset}
 \label{cad_models}
-This dataset is intended to encode the diversity of vehicles according to type, dimension, and chassis shape. It is created based on a selected subset of synthetic 3D CAD models \cite{NIPS2012_4562}. We only include the well-aligned and  symmetrical models, and also take the dimension and type into consideration. We classify all the models into six categories: Mini, Hatchback, Sedan, SUV, Wagon, and Van. And for each category,  subcategories are marked out according to their dimensions and shapes in order to make a refined selection.  The statistic of dimensions is well distributed and each existing vehicle can be classified into one category only.
+This dataset is intended to encode the diversity of vehicles according to the  type, dimension, and chassis shape of vehicles. It is created based on a selected subset of synthetic 3D CAD models \cite{NIPS2012_4562}. We only include the well-aligned and  symmetrical models, and also take the dimension and type into consideration. We classify all the models into six categories: Mini, Hatchback, Sedan, SUV, Wagon, and Van. And for each category,  subcategories are marked out according to their dimensions and shapes in order to make a refined selection.  The statistic of dimensions is well distributed and each existing vehicle can be classified into one category only.
 
 
-Our final dataset consists of 54 valid vehicle models. Each vehicle model has a 3D CAD model, a 3D template, and a 3D sketch correspondingly, as shown in Figure \ref{figure:vehicle_dataset}. All these three representations are aligned in canonical view and share an identical object coordinate system. The CAD models are created based on real vehicles and have all the geometry information with them. The 3D templates represent the vehicles' dimensions. The 3D template associated to the 3D model $k$ is denoted as $t_k = (h_k, w_k, l_k)$ where $h_k, w_k$ and $l_k$ represent the height, width, and length of the model respectively. 
-
-The  3D sketches indicate the chassis shapes. Each 3D sketch consists of 20 characteristic points around the chassis with each point denoting one part of the vehicle. So the $k^{th}$ sketch is denoted as $S_k^{3d}  = (p_1, p_2, ... p_{20})$, where $~p_i = (x_i, y_i, z_i)$. The reason why we choose the points around chassis as feature points is that their geometric relationship is more stable than points in other places. Because the chassis part is more about functionality than appearance attraction compared to other parts of the vehicle,  \eg the upper part. In this way, the sketches can be more universal so that they can represent a wider range of vehicles, which reduces the number of models required and further increases the computational efficiency. 
-
-In order to create the 3D sketches, we implement a labelling tool, shown in Figure \ref{figure:label_cad}. It is capable to label the 3D coordinates for all the characteristic points associated to each vehicle. These coordinates are expressed in the object coordinate system.
+Our final dataset consists of 54 valid vehicle models. Each vehicle model has a 3D CAD model, a 3D template, and a 3D sketch correspondingly, as shown in Figure \ref{figure:vehicle_dataset}. All these three representations are aligned in canonical view and share an identical object coordinate system. The CAD models are created based on real vehicles and have all the geometry information with them. The 3D templates represent the 3D dimensions of vehicles. The 3D template associated to the 3D model $k$ is denoted as $t_k = (h_k, w_k, l_k)$ where $h_k, w_k$ and $l_k$ represent the height, width, and length of the model respectively. 
 
 \begin{figure}[H]		
 	\includegraphics[width=1\textwidth]{vehicle_dataset.jpg}
@@ -356,16 +356,21 @@ In order to create the 3D sketches, we implement a labelling tool, shown in Figu
 	\label{figure:vehicle_dataset}
 \end{figure}
 
+The  3D sketches indicate the chassis shapes by 3D points. Each 3D sketch consists of 20 characteristic points around the chassis with each point denoting one part of the vehicle. So the $k^{th}$ sketch is denoted as $S_k^{3d}  = (p_1, p_2, ... p_{20})$, where $~p_i = (x_i, y_i, z_i)$. The reason why we choose the points around chassis as feature points is that their geometric relationship is more stable than points in other places. Because the chassis part is more about functionality than appearance attraction compared to other parts of the vehicle,  \eg the upper part. In this way, the sketches can be more universal so that they can represent a wider range of vehicles, which reduces the number of models required and further increases the computational efficiency. 
+
+In order to create the 3D sketches, we implement a labelling tool, shown in Figure \ref{figure:label_cad}. It is capable to label the 3D coordinates for all the characteristic points associated to each vehicle. These coordinates are expressed in the object coordinate system.
+
+
 \begin{figure}[H]		
 	\includegraphics[width=1\textwidth]{label_cad.png}
-	\caption{Labelling tool for 3D sketches}
+	\caption{The labelling tool to create 3D sketches.}
 	\centering
 	\label{figure:label_cad}
 \end{figure}
 
 \subsubsection{Labelling for KITTI Dataset}
 
-Our approach requires three extra kinds of labels to training the Deep3DP Network, \ie 2D coordinates and visibility property of characteristic points and a dimension proximity vector, as shown in Table \ref{new_label}.  Labelling is never a trivial task. Due to the demanding workload of manual labelling and the cases where it is almost impossible to label the small vehicles in the image manually, we propose an automatic label generation method. It is able to make use of the 3D vehicle dataset and the KITTI dataset to generate these three additional kinds of ground truth.
+Our approach requires three extra kinds of labels to training the Deep3DP Network, \ie 2D coordinates and visibility property of characteristic points and a set of dimension proximity vectors, as shown in Table \ref{new_label}.  Labelling is never a trivial task. Due to the demanding workload of manual labelling and the cases where it is almost impossible to label the small vehicles in the image manually, we propose an automatic label generation method. It is able to make use of the 3D vehicle dataset and the KITTI dataset to generate these three additional kinds of ground truth.
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[h]
@@ -378,7 +383,7 @@ Our approach requires three extra kinds of labels to training the Deep3DP Networ
 			\#Values & Name        & Description                                                                                                                                                             \\ \hline
 			2x20        & 2D coordinate  & $(x, y)$, the location of 20 characteristic points in the image coordinates                                                                                                                \\ \hline
 			1x20        & visibility    & \begin{tabular}[c]{@{}l@{}}An integer indicating visibility property of each point: \\ 0 = visible, 1 = occluded, \\ 2 = self-occluded, 3 = truncated\end{tabular}    \\ \hline
-			3x54        & dimension proximity & \begin{tabular}[c]{@{}l@{}} A vector $\mathit{T_{i}}$ represents the dimension ratios \\ between each model and the vehicle  \end{tabular}   \\ \hline
+			3x54        & dimension proximity & \begin{tabular}[c]{@{}l@{}} A set of vectors $\mathit{T_{i}}$ represents the dimension ratios \\ between each model and the vehicle  \end{tabular}   \\ \hline
 		\end{tabular}%
 	}
 \end{table}
@@ -386,7 +391,8 @@ Our approach requires three extra kinds of labels to training the Deep3DP Networ
 
 \paragraph{2D Coordinates}
 
-2D coordinates of key points of each vehicle in the image coordinate system are generated by projecting the 3D sketch of this vehicle to the image. The vehicle's 3D sketch is selected via template-matching, \ie the best-matching sketch is the one whose associated template is closest to the vehicle's dimensions. The 3D-2D projection is performed based on the given intrinsic and extrinsic parameters, as shown in Figure \ref{3D_2D_projection}. The intrinsic parameters are given as calibration by KITTI and the extrinsic parameters are given as 3D object dimensions and rotation $r_y$ in KITTI labels. KITTI makes a simplified assumption here that the vehicle only rotates around the yaw axis but not roll or pitch axis. One example of the labelled 2D coordinates is shown in Figure \ref{visibilie_eg}.
+2D coordinates of key points of each vehicle in the image coordinate system are generated by projecting the 3D sketch of this vehicle to the image. The vehicle's 3D sketch is selected via model-matching, \ie the best-matching sketch is the one whose associated template is closest to the vehicle's dimensions. The 3D-2D projection is performed based on the given intrinsic and extrinsic parameters by KITTI, as shown in Figure \ref{3D_2D_projection}. The intrinsic parameters are given as calibration parameters and the extrinsic parameters are given as 3D vehicle location and rotation $r_y$ in KITTI labels. KITTI makes a simplified assumption here that the vehicle only rotates around the Y axis but not X or Z axis. One example of the labelled 2D coordinates is shown in Figure \ref{visibilie_eg}.
+
 
 \begin{figure}[H]		
 	\includegraphics[width=0.8\textwidth]{projection_matrix.png}
@@ -397,17 +403,11 @@ Our approach requires three extra kinds of labels to training the Deep3DP Networ
 
 \begin{figure}[H]		
 	\includegraphics[width=0.8\textwidth]{visibilie_eg.png}
-	\caption[Example of 2D coordinates and visibility]{Example of 2D coordinates and visibility of one vehicle. The left image is one patch of KITTI image. The right image is the one after labelling. The points indicate the 2D coordinates and the color indicates the types of visibility: red for visible, green for occluded, and blue for self-occluded.}
+	\caption[One example of 2D coordinates and visibility]{One example of 2D coordinates and visibility of one vehicle. The left image is one patch of KITTI image. The right image is the one after labelling. The points indicate the 2D coordinates and the color indicates the types of visibility: red for visible, green for occluded, and blue for self-occluded.}
 	\centering
 	\label{visibilie_eg}
 \end{figure}
 
-\begin{figure}[H]		
-	\includegraphics[width=0.8\textwidth]{visibility_imp.png}
-	\caption[Visibility labelling mechanism]{Visibility labelling mechanism. The left image shows the rotation $r_y$ in the camera coordinate system, which helps distinguish the visible and self-occluded case. The right image shows the location of the vehicle in the camera coordinate system, which helps define the occluded situation.}
-	\centering
-	\label{visibility_imp}
-\end{figure}
 
 
 
@@ -425,18 +425,26 @@ As an example of the labelled visibility shows in Figure \ref{visibilie_eg}, the
 \end{enumerate}
 
 
-The visibility of each point is determined by its position, \ie the 2D coordinate in the image.  Being visible or self-occluded is distinguished by means of rotation $r_y$ of each vehicle. As the right schematic diagram in Figure \ref{visibility_imp} shows, the rotation $r_y$ can indicate unambiguously which faces of the vehicle are facing to or away from the camera. If the points are on the observable faces, they  are labelled as visible,  otherwise they are classified as self-occluded. Occluded case happens when the 2D coordinate of the point falls into the 2D bounding box of a former object. The object is defined as former when it locates in the region enclosed by the axes and two solid blue line in the left schematic plot of Figure \ref{visibility_imp} if the vehicle is on the first quartile.  And when the vehicle is on the second quartile, it is just a mirrored case. Truncated is identified when the point's 2D coordinate exceeds the image boundaries. The size of KITTI images is determined. The truncated property has the highest priority, the occluded underlies, the self-occluded or the visible is considered at last.
+The visibility of each point is determined by its position, \ie the 2D coordinate in the image.  Being visible or self-occluded is distinguished by means of rotation $r_y$ of each vehicle. As the right schematic diagram in Figure \ref{visibility_imp} shows, the rotation $r_y$ can indicate unambiguously which faces of the vehicle are facing to or away from the camera. If the points are on the observable faces, they  are labelled as visible,  otherwise they are classified as self-occluded. Occluded case happens when the 2D coordinate of the point falls into the 2D bounding box of a former object. The object is defined as former when it locates in the region enclosed by the axes and two solid blue line in the left schematic plot of Figure \ref{visibility_imp} if the vehicle is on the first quartile.  And when the vehicle is on the second quartile, it is just a mirrored case. Truncated is identified when the point's 2D coordinate exceeds the image boundaries. The size of KITTI images is determined. The truncated property has the highest priority, the occluded underlies, and the self-occluded or the visible is considered at last.
+
+\begin{figure}[H]		
+	\includegraphics[width=0.8\textwidth]{visibility_imp.png}
+	\caption[Visibility labelling mechanism]{Visibility labelling mechanism. The left image shows the rotation $r_y$ in the camera coordinate system, which helps distinguish the visible and self-occluded case. The right image shows the location of the vehicle in the camera coordinate system, which helps define the occluded situation.}
+	\centering
+	\label{visibility_imp}
+\end{figure}
+
 
 
 \paragraph{Dimension Proximity}
 \label{template}
 
-Dimension proximity of one vehicle is encoded as a vector $\mathit{T_{i}}$ which is defined as $\mathit{T}_i = \{r_k\}_{k \in \{1,.., K\}}$, where $\mathit{K}$ denotes the number of 3D vehicle models and  $r_k~=~(r_h,r_w,r_l)$ corresponds to three scaling ratios between the dimensions (\ie height, width, and length) of each model and the vehicles respectively. The vector $\mathit{T_{i}}$ represents the similarity between each model and the vehicle. The most similar model of a vehicle is the one whose $r_k$ is closest to $(1, 1, 1)$.
+Dimension proximity of one vehicle is encoded as a set of vectors $\mathit{T_{i}}$ which is defined as $\mathit{T}_i = \{r_k\}_{k \in \{1,.., K\}}$, where $\mathit{K}$ denotes the number of 3D vehicle models and  $r_k~=~(r_h,r_w,r_l)$ corresponds to three scaling ratios between the dimensions (\ie height, width, and length) of each model and the vehicles respectively. The vector $\mathit{r_k}$ represents the similarity between the model $k$ and the vehicle. The most similar model of a vehicle is the one whose $r_k$ is closest to $(1, 1, 1)$.
 
 \subsubsection{Notations}
 In sum, based on the KITTI images and 3D vehicle models, each vehicle can be defined by seven critical attributes:
 \[  \{D, B^{2d}, ~B^{3d}, ~C^{2d}, ~C^{3d}, ~V, ~T\}  \]
-$D = (h, w, l)$ represents the dimensions of the vehicle. $B^{2d} = (c_u, c_v, w, h)$ defines the 2D bounding box in the image with $(c_u, c_v)$ denoting its centre,  $w$ for its width and $h$ for its height. $B^{3d} = (o, \theta, d)$ where $o = (c_x, c_y, c_z)$ is the centre, $\theta$ is the rotation $r_y$ around the yaw axis, and $d = (w, h, l)$ is its dimensions. $C^{2d}  = \{(u_i, v_i)\}_{i \in \{1, ...,20\}}$ represents the 2D part coordinates in the image plane, while $C^{3d}  = \{(x_i, y_i, z_i)\}_{i \in \{1, ...,20\}}$ denotes the 3D part coordinates in world coordinate system. $V = \{v_i\}_{i \in \{1, ...,20\}}$ is the visibility for all the characteristic points in the vehicle.  $T = \{{(r_{h},r_{w},r_{l})}_k\}_{k \in \{1, ...,54\}}$ is the dimension proximity vector.
+$D = (h, w, l)$ represents the dimensions of the vehicle. $B^{2d} = (c_u, c_v, w, h)$ defines the 2D bounding box in the image with $(c_u, c_v)$ denoting its centre,  $w$ for its width and $h$ for its height. $B^{3d} = (o, \theta, d)$ where $o = (c_x, c_y, c_z)$ is the centre, $\theta$ is the rotation $r_y$ around the yaw axis, and $d = (w, h, l)$ is its dimensions. $C^{2d}  = \{(u_i, v_i)\}_{i \in \{1, ...,20\}}$ represents the 2D part coordinates in the image plane, while $C^{3d}  = \{(x_i, y_i, z_i)\}_{i \in \{1, ...,20\}}$ denotes the 3D part coordinates in world coordinate system. $V = \{v_i\}_{i \in \{1, ...,20\}}$ is the visibility for all the characteristic points in the vehicle.  $T = \{{(r_{h},r_{w},r_{l})}_k\}_{k \in \{1, ...,54\}}$ is the dimension proximity vector set.
 
 \subsection{Deep3DP Network}
 \label{network}
@@ -460,9 +468,9 @@ Even though there are various layers, most layers  are composed of neurons, the 
 a_{ij} = \sigma(W_{ij}^T X_i +b_j)
 \end{equation}
 
-where $a_{ij}$ is the result of the $i_th$ neuron in the $j_th$ layer, $\sigma(\cdot)$ is the activation function and $W_ij$ and $b_j$ are the weights vector and bias applied to input vector $X_i$.  The pooling layer is a special case which performs downsampling operations, such as max pooling \cite{Boureau:2010} and average pooling \cite{6460871}.
+where $a_{ij}$ is the result of the $i_{th}$ neuron in the $j_{th}$ layer, $\sigma(\cdot)$ is the activation function and $W_{ij}$ and $b_j$ are the weights vector and bias applied to input vector $X_i$.  The pooling layer is a special case which performs downsampling operations, such as max pooling \cite{Boureau:2010} and average pooling \cite{6460871}.
 
-As shown in Figure \ref{figure:nn_archi}, our network follows the standard CNN architecture established in LeNet-5 \cite{726791}. It stacks a set of convolutional layers and pooling layers as a feature extractor, followed by 3 residual blocks and one fully-connected layer to refine the features, and three kinds of output layers in the end. The goal of this network is to learn the 2D coordinates and visibility property of 20 interest points and the dimension proximity vector of the vehicle, given the RGB images captured by a monocular camera.
+As shown in Figure \ref{figure:nn_archi}, our network follows the standard CNN architecture established in LeNet-5 \cite{726791}. It stacks a set of convolutional layers and pooling layers as a feature extractor, followed by 3 residual blocks and one fully-connected layer to refine the features, and three kinds of output layers in the end. The goal of this network is to learn the 2D coordinates and visibility property of 20 interest points and the dimension proximity vectors of the vehicle, given the RGB images captured by a monocular camera.
 
 \paragraph{Input Layer}
 The input layer accepts the RGB images and feeds them into the network. In theory, images with arbitrary size can be accepted, but to make it more efficient, we use images with fixed size (96 x 160 pixels).  In this way, multiple images can be processed in one batch in order to reduce the variance of parameter updates and make the best use of highly optimized matrix optimizations during training \cite{DBLP:journals/corr/Ruder16}.
@@ -602,7 +610,7 @@ Transfer learning is proposed to transfer the representation learned from one ta
 Therefore, we initialize our feature extractor with parameters learned on ImageNet dataset \cite{DBLP:Russakovsky14} and the three residual blocks with parameters trained on the KITTI dataset. The fully-connected layer is initialized from a zero-mean Gaussian distribution with standard deviation 0.01 and all the output layers are initialized with zeros.
 
 
-\paragraph{Learning Algorithms / Optimization}
+\paragraph{Learning Algorithms}
 
 Optimization is a task of finding the value $x$ in order to minimize or maximize some objective function $f(x)$. One most powerful optimization technique category in deep learning is gradient-based.
 
@@ -702,19 +710,17 @@ The KITTI data simplifies the rotation to one dimension, $r_y$, so that we follo
 	\label{figure:corresp}
 \end{figure}
 
-\begin{figure}[H]		
-	\includegraphics[width=0.8\textwidth]{visualization2.png}
-	\caption[Visualization of the outputs of our approach]{(a). Visualization sketch of 3D bounding box and orientation, (b). Visualization of the 3D bounding box, key points, and their visibility. (c). 3D visualization in the Velodyne 3D view, (d). 2D visualization in bird's-eye view.}
-	\centering
-	\label{figure:visualization}
-\end{figure}
-
-
 \subsubsection{Visualization}
 To visualize the 3D bounding box, we use the vehicle's dimensions to determine the eight corners of the cuboid and then project this cuboid into the image with the projection matrix which is composed of the recovered rotation and translation. And in order to show the rotation clearly, we project a line on the ground to show the direction of the vehicle. This visualization mechanism is shown in Figure \ref{figure:visualization} (a) where the front face of the vehicle is coloured with magenta. Figure \ref{figure:visualization} (b) shows a example of this visualization. 
 
 Besides, to better visually check the performance of our approach, we visualize the estimated 3D bounding boxes in 3D view and bird's-eye view. Figure \ref{figure:visualization} (c) shows an example in 3D view where we plot the 3D bounding boxes in the cloud points of the current frame and the pyramid denotes the forward direction. Figure \ref{figure:visualization} (d) shows an example in bird's-eye view where we can clearly illustrate the location of vehicles.
 
+\begin{figure}[H]		
+	\includegraphics[width=0.9\textwidth]{visualization2.png}
+	\caption[Visualization of the outputs of our approach]{(a). Visualization sketch of 3D bounding box and orientation, (b). Visualization of the 3D bounding box, key points, and their visibility. (c). 3D visualization in the Velodyne 3D view, (d). 2D visualization in bird's-eye view.}
+	\centering
+	\label{figure:visualization}
+\end{figure}
 
 
 
@@ -780,13 +786,16 @@ where $(h_{gt}, w_{gt}, l_{gt})$ is the ground truth. 2D part visibility predict
 	\end{tabular}
 \end{table}
 
+%\clearpage 
+
+
 \subsection{Design Choices}
 \label{d_choices}
 
 \subsubsection{Model Selection Strategy}
-We have mentioned in Section \ref{data} that we match the vehicles with models based on dimension similarity. Now we give the reasons why we choose this strategy. The first reason is that the distribution of models' dimension covers the KITTI vehicles'. Besides, this strategy achieves the best performance among possible strategies as shown in Table \ref{model_selection}. The CAD model dataset provides two sets of dimensions: real-world dimensions and  uniform dimensions where all the width is 1.8 meters. Dims strategy means that the best model is the one whose dimension vector has the least distance to the vehicle's. Dim Ratios strategy is similar but bases on the ratio vector $(height/width, length/width)$ with the uniform dimensions. The rest two are based on Dims and Dim Ratios, \ie using one strategy to select 10 models first and then applying the other to select the best one.
+We have mentioned in Section \ref{data} that we match the vehicles with models based on dimension similarity. Now we give the reasons why we choose this strategy. The first reason is that the distribution of models' dimension covers the KITTI vehicles'. Besides, this strategy achieves the best performance among possible strategies as shown in Table \ref{model_selection}. The CAD model dataset provides two sets of dimensions: real-world dimensions and uniform dimensions where all the width is 1.8 meters. Dims strategy means that the best model is the one whose dimension vector has the least distance to the vehicle's. Dim Ratios strategy is similar but bases on the ratio vector $(height/width, length/width)$ with the uniform dimensions. The rest two are based on Dims and Dim Ratios, \ie using one strategy to select 10 models first and then applying the other to select the best one.
 
-We use two metrics to evaluate these strategies: type accuracy and mean deviation. The types are defined and presented in Figure \ref{figure:vehicle_dataset}. Vehicle types can present the relative location of characteristic points of vehicles well because the 3D sketches of vehicles vary greatly among different types but remain similar within the same type. The dimension variation can be solved via scaling. Therefore, we label 1000 KITTI vehicles and test the type matching accuracy among these strategies. The second metric, mean deviation, is the Euclidean distance between the dimension vectors of the selected model and ground truth. Even though the performance of Dims is not that good, it is the best one we can use based on the information provided by the dataset. Figure \ref{figure:model_selection_s} shows one labelled example where Dims has the most accurate points labelled and the others all label the points around the back wheel wrongly.
+We use two metrics to evaluate these strategies: type accuracy and mean deviation. The types are defined and presented in Figure \ref{figure:vehicle_dataset}. The 3D sketches of vehicles vary greatly among different types but remain similar within the same type. The dimension variation can be solved via scaling. Therefore, we label 1000 KITTI vehicles and test the type matching accuracy among these strategies. The second metric, mean deviation, is the Euclidean distance between the dimension vectors of the selected model and ground truth. Even though the performance of Dims is not that good, it is the best one we can use based on the information provided by the dataset. Figure \ref{figure:model_selection_s} shows one labelled example where Dims has the most accurate points labelled and the others all label the points around the back wheel wrongly.
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[ht]
@@ -804,8 +813,8 @@ We use two metrics to evaluate these strategies: type accuracy and mean deviatio
 \end{table}
 
 
-\begin{figure}[h]		
-	\includegraphics[width=1\textwidth]{model_selection_s.png}
+\begin{figure}[H]		
+	\includegraphics[width=0.9\textwidth]{model_selection_s.png}
 	\caption[One labelled example of four model selection strategies.]{One labelled example of four model selection strategies. (a). Dim Ratios. (b). Dims. (c). Dim Ratios \& Dims. (d). Dims \& Dim Ratios. }
 	\centering
 	\label{figure:model_selection_s}
@@ -934,7 +943,7 @@ Learning rate is one hyperparameter that determines how much the parameters of t
 Automatic learning rate selection methods alleviate the difficulty hugely, but they are too computational expensive so that we manually tune it. We first apply an ``LR range test" \cite{DBLP:journals/corr/Smith15a}, training the network for several epochs with the learning rate increasing linearly in a guessing range and then analysing the loss over these learning rates. From the test result in Figure \ref{figure:lr_test}, the proper learning rate falls in the range $[10^{-6}, 10^{-4}]$. 
 
 \begin{figure}[H]		
-	\includegraphics[width=0.8\textwidth]{LR_range_test.png}
+	\includegraphics[width=0.7\textwidth]{LR_range_test.png}
 	\caption[Results of ``LR range test".]{Results of ``LR range test": loss over monotonically increasing learning rate. }
 	\centering
 	\label{figure:lr_test}
@@ -1167,16 +1176,16 @@ In this section, we discuss the deficiencies of our approach, analyse their caus
 \subsection{Deficiency of 2D Coordinate Labelling}
 \label{2d_def}
 \subsubsection{Deficiency of Our Labelling Approach}
-Our approach requires accurate 2D coordinates of characteristic points to perform 2D-3D matching to calculate the location and orientation of the vehicles. However, precisely labelling these points is demanding and even impossible for some vehicles with our semi-automatic labelling tool. The deficiency of labelling results from our labelling approach and the KITTI dataset.
+Our approach requires accurate 2D coordinates of characteristic points to perform 2D-3D matching to calculate the location and orientation of the vehicles. However, precisely labelling these points is demanding and there are two main deficiencies of labelling resulting from our labelling approach and the KITTI dataset.
 
 Due to the variety of dimensions and shapes of vehicles, it is very hard to find a model that exactly matches the target vehicle with a small set of models. But if we expand the model set to cover all vehicles, the required quantity is too huge to satisfy. Therefore, we can only use a small set of models which means that the approximation and scaling are inevitable. And this will introduce errors to the labelling of 2D coordinates. Figure \ref{figure:label_def} (a) and (b) show two bad labelled examples. The imprecision of (a) results from the approximation of model matching, \ie most points are labelled correctly but point 1-6 are not. This is because the model can't perfectly fit the vehicle. The wrongly labelled points around wheels in Figure \ref{figure:label_def} (b) results from the scaling the model to fit the vehicle so that, for example, the distance between point 4 and 8 are larger than the diameter of the wheel. The other pairs of points around the wheel have the similar situation so that most points are not labelled correctly for this vehicle.
 
 \subsubsection{Deficiency of KITTI Dataset Labelling}
-Our labelling approach requires accurate labels of the dataset because 2D points are very sensitive to the exact location of the target vehicle. But some of the KITTI images are not labelled so well that our approach makes mistakes. There are three main deficiencies of the KITTI labelling as shown in Figure \ref{figure:label_def} (f), (g), and (h). (f) shows the 3D bounding box ground truth of this vehicle is not correctly labelled. The 3D bounding box does not encompass the vehicle, especially the rear part, which leads to wrong labelling. (g) and (h) shows that our approach wrong labels the 2D points due to the assumption of KITTI that the vehicle only rotates along the yaw axis rather than the roll and pitch axis.
+Our labelling approach requires accurate labels of the dataset because 2D points are very sensitive to the exact location of the target vehicle. But some of the KITTI images are not labelled so well that our approach makes mistakes. There are three main deficiencies of the KITTI labelling as shown in Figure \ref{figure:label_def} (f), (g), and (h). (f) shows the 3D bounding box ground truth of this vehicle is not correctly labelled. The 3D bounding box does not encompass the vehicle, especially the rear part, which leads to wrong labelling. (g) and (h) shows that our approach wrong labels the 2D points due to the assumption of KITTI that the vehicle only rotates along the Y axis rather than the X and Z axis.
 
 \begin{figure}[H]		
-	\includegraphics[width=0.8\textwidth]{label_def.png}
-	\caption[Labelling examples of 2D points with the original size.]{Labelling examples with the original vehicle size. (a). Approximation results in inaccurate labels for point 1-6. (b). Scaling leads to bad labelling for points around the wheels. (c). One of the very small vehicles is able to be labelled with our approach. (d). The example that the side faces are not visible is can be labelled with our approach. (e). The occluded vehicle can also be labelled with our approach. (f). The 3D bounding box ground truth of this vehicle is not correctly labelled in KITTI dataset. (g). KITTI does not consider the rotation along the roll axis, which results in bad labelling. (h). KITTI does not consider the rotation along the pitch axis, which results in totally wrong labelling.}
+	\includegraphics[width=0.93\textwidth]{label_def.png}
+	\caption[Labelling examples of 2D points with the original size.]{Labelling examples with the original vehicle size. (a). Approximation results in inaccurate labels for point 1-6. (b). Scaling leads to bad labelling for points around the wheels. (c). One of the very small vehicles is able to be labelled with our approach. (d). The example that the side faces are not visible can be labelled by our approach. (e). The occluded vehicle can also be labelled with our approach. (f). The 3D bounding box ground truth of this vehicle is not correctly labelled in KITTI dataset. (g). Wrong labels results from that KITTI does not consider the rotation along the X axis, which results in bad labelling. (h). Wrong labels results from that KITTI does not consider the rotation along the Z axis.}
 	\centering
 	\label{figure:label_def}
 \end{figure}
@@ -1193,22 +1202,24 @@ As described in Section \ref{visibility}, we label the visibility property of ch
 
 
 \begin{figure}[H]		
-	\includegraphics[width=0.7\textwidth]{visib_def.png}
-	\caption[Labelling examples for visibility with the original size.]{Labelling examples for visibility with the original size. (a). The 2D bounding box is larger than the vehicle's real size, which results in labelling the self-occluded points as occluded. (b). KITTI doesn't label the traffic sign so that our approach can't label the occluded points correctly. (c). KITTI doesn't label the building so that our approach can't label the occluded points correctly. (d), (e) and (f).  Images with LiDAR data projection for (a), (b and (c).}
+	\includegraphics[width=0.8\textwidth]{visib_def_3.png}
+	\caption[Labelling examples for visibility with the original size.]{Labelling examples for visibility with the original size. (a). The 2D bounding box is larger than the vehicle's real size, which results in labelling the self-occluded points as occluded. (b). KITTI doesn't label the traffic sign so that our approach can't label the occluded points correctly. (c). KITTI doesn't label the building so that our approach can't label the occluded points correctly. }
 	\centering
 	\label{figure:visib_def}
 \end{figure}
 
-%\begin{figure}[H]		
-%	\includegraphics[width=0.7\textwidth]{visib_def_lidar.png}
-%	\caption[LiDAR data projection]{Images with LiDAR data projection for examples in Figure \ref{figure:visib_def} (a), (b), and (c) respectively.}
-%	\centering
-%	\label{figure:visib_def_lidar}
-%\end{figure}
 
 \subsubsection{Possible Improvements}
 
-KITTI offers the LiDAR data for all images, which can provide the depth information of each pixel point in the image or at least of a very small region. And based on the ground truth of location, orientation, and dimension of vehicles given by KITTI, we can calculate the depth of points distributed on the surface of the vehicles. By comparing these two kinds of depth information, we can correctly figure out whether there is some object in front of the target vehicle or not and which parts of the target vehicle are occluded, and thus we can classify the visibility properties correctly. Figure \ref{figure:visib_def} (d), (e) and (f). shows the images with LiDAR projection for (a), (b and (c). With the LiDAR depth information, we can easily classify the points around rear in (a) as self-occluded, and the occluded objects in (b) and (c) can be clearly detected and thus, we can assign the points whose depth is deeper than these objects as occluded. Therefore, for more accurate visibility labelling, it is worth making use of the LiDAR data.
+KITTI offers the LiDAR data for all images, which can provide the depth information of each pixel point in the image or at least of a very small region. And based on the ground truth of location, orientation, and dimension of vehicles given by KITTI, we can calculate the depth of points distributed on the surface of the vehicles. By comparing these two kinds of depth information, we can correctly figure out whether there is some object in front of the target vehicle or not and which parts of the target vehicle are occluded, and thus we can classify the visibility properties correctly. Figure \ref{figure:visib_def_lidar} shows the images with LiDAR projection for Figure \ref{figure:visib_def}. With the LiDAR depth information, we can easily classify the points around rear in Figure \ref{figure:visib_def} (a) as self-occluded, and the occluded objects in Figure \ref{figure:visib_def} (b) and (c) can be clearly detected and thus, we can assign the points whose depth is deeper than these objects as occluded. Therefore, for more accurate visibility labelling, it is worth making use of the LiDAR data.
+
+
+\begin{figure}[H]		
+	\includegraphics[width=0.8\textwidth]{visib_def_lidar.png}
+	\caption[LiDAR data projection]{Images with LiDAR data projection for examples in Figure \ref{figure:visib_def} (a), (b), and (c) respectively.}
+	\centering
+	\label{figure:visib_def_lidar}
+\end{figure}
 
 \subsection{Deficiency of Template Matching}
 In our approach, there are two situations where template matching is performed to fit a target vehicle with a 3D vehicle model. The first one is during labelling, when a 3D vehicle sketch is required to be projected into the KITTI images to generate 2D coordinates of key points of a target vehicle. And the model is selected via dimension matching. Another is during inference phase, where one 3D sketch is needed to generate the corresponding 3D coordinates of the key points for the target vehicle in the world coordinate system. This time the model is selected based on the estimated dimension proximity vector, \ie the ratios of 3 dimensions between the target vehicle and all 3D vehicle models.
